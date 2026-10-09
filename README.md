@@ -1,8 +1,11 @@
 # Chúc mừng 20/10
 
-Thiệp 20/10 cho chị em trong công ty: pháo hoa tụ thành tên, lá thư riêng, vườn hoa lời chúc của cả team, hộp quà.
+Thiệp 20/10 cho chị em trong công ty: pháo hoa tụ thành tên, phong thư dấu sáp mở ra lá thư riêng (chữ hiện dần), vườn hoa lời chúc của cả team, hộp quà kèm thẻ cào, màn pháo hoa trái tim kết thúc.
 
-**Link gửi từng người** (mỗi link có ô xem trước riêng khi dán vào Telegram):
+**Một link chung cho cả 4 người** (vào rồi chạm vào ảnh chibi của mình):
+- https://hoanggiacuong.github.io/ChucMung2010/
+
+**Hoặc link riêng từng người** (mỗi link có ô xem trước riêng khi dán vào Telegram):
 - https://hoanggiacuong.github.io/ChucMung2010/ngan.html
 - https://hoanggiacuong.github.io/ChucMung2010/thao.html
 - https://hoanggiacuong.github.io/ChucMung2010/quyen.html
@@ -12,6 +15,8 @@ Thiệp 20/10 cho chị em trong công ty: pháo hoa tụ thành tên, lá thư 
 1. Sửa `data.js`: lời chúc, quà, lời chúc của anh em trong vườn hoa, ảnh
 2. Chạy `node tao-trang.js` để tạo lại các trang `.html`
 3. Commit và push, khoảng 1–2 phút sau GitHub Pages cập nhật
+
+Ảnh chibi: hiện đang là ảnh vẽ tạm `anh/chibi-*.svg`. Thay bằng ảnh thật (ảnh vuông, khoảng 400×400) rồi sửa trường `chibi` trong `data.js`.
 
 Ảnh: bỏ vào thư mục `anh/` rồi ghi đường dẫn vào `data.js` (ví dụ `anh: "anh/ngan.jpg"`). Nên thu nhỏ ảnh còn chiều rộng khoảng 1000px.
 

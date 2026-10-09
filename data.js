@@ -4,7 +4,9 @@
 //   chao:   dòng mở đầu lá thư ("Chị Ngân ơi,")
 //   ban:    cách gọi trong các câu chung ("chị" / "Quyên" / "em")
 //   tenNgan: chữ pháo hoa tụ lại trên bầu trời (ngắn thôi cho rõ: "Ngân")
-//   anh:    ảnh riêng, ví dụ "anh/ngan.jpg" (để trống nếu không có)
+//   anh:    ảnh riêng trong lá thư, ví dụ "anh/ngan.jpg" (để trống nếu không có)
+//   chibi:  ảnh mặt/chibi để chọn ở link chung (index.html), ví dụ "anh/chibi-ngan.png"
+//           (để trống thì hiện chữ cái đầu tên)
 //   qua:    phần quà trong hộp (để trống "" thì ẩn phần bốc quà)
 // Dùng được cả trên trình duyệt (window.THIEP) lẫn trong node (module.exports).
 var THIEP = {
@@ -39,6 +41,7 @@ var THIEP = {
         "20/10 này chúc chị thật nhiều sức khoẻ, luôn xinh đẹp, cười nhiều hơn và bớt phải nhắc tụi em nộp việc đúng hạn 😄"
       ],
       anh: "",
+      chibi: "anh/chibi-ngan.svg",
       qua: "Một buổi spa thư giãn trọn gói 💆‍♀️"
     },
     thao: {
@@ -51,6 +54,7 @@ var THIEP = {
         "Chúc chị 20/10 ngập tràn hoa và quà, luôn trẻ trung, xinh đẹp, gia đình êm ấm và mọi điều mong ước đều thành."
       ],
       anh: "",
+      chibi: "anh/chibi-thao.svg",
       qua: "Một bó hoa tươi giao tận bàn mỗi thứ Hai trong tháng 💐"
     },
     quyen: {
@@ -63,6 +67,7 @@ var THIEP = {
         "Chúc Quyên 20/10 thật vui, công việc thuận lợi, và năm nay đi du lịch được thật nhiều nơi mình thích."
       ],
       anh: "",
+      chibi: "anh/chibi-quyen.svg",
       qua: "Voucher trà sữa cả tháng 🧋"
     },
     quynhanh: {
@@ -75,6 +80,7 @@ var THIEP = {
         "Chúc em 20/10 thật nhiều niềm vui, học được thật nhiều, luôn xinh xắn và được cả team cưng như giờ nhé!"
       ],
       anh: "",
+      chibi: "anh/chibi-quynhanh.svg",
       qua: "Được về sớm một buổi chiều tự chọn 🏃‍♀️"
     }
   },

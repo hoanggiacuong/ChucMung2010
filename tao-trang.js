@@ -9,8 +9,9 @@ const phienBan = Date.now().toString(36); // chống trình duyệt trong Telegr
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
 function trang(khoa, nguoi) {
-  const tieuDe = `💌 Gửi ${nguoi.goi}`;
-  const moTa = `Có một bất ngờ nhỏ ngày 20/10 dành cho ${nguoi.goi}. Mở ra xem nhé!`;
+  const tieuDe = khoa ? `💌 Gửi ${nguoi.goi}` : "💌 Thiệp 20/10 cho chị em";
+  const moTa = khoa ? `Có một bất ngờ nhỏ ngày 20/10 dành cho ${nguoi.goi}. Mở ra xem nhé!`
+    : "Mỗi chị em một bất ngờ riêng ngày 20/10. Vào chọn mặt mình để mở thiệp nhé!";
   const url = THIEP.diaChi + (khoa ? `${khoa}.html` : "");
   const anh = THIEP.diaChi + "cover.png";
   return `<!doctype html>
@@ -38,11 +39,13 @@ function trang(khoa, nguoi) {
 <body class="khoa">
 <div class="sao" id="sao"></div>
 <canvas id="troi" aria-hidden="true"></canvas>
+<div class="canh-hoa" id="canh-hoa" aria-hidden="true"></div>
 <button class="nut-nhac" id="nut-nhac" type="button" aria-label="Bật hoặc tắt nhạc" hidden>♪</button>
 
 <main>
   <section id="mo-dau">
     <div class="mo-dau-chu" id="mo-dau-chu">
+      <div class="chibi chibi-mo" id="chibi-mo" hidden></div>
       <div class="nho">20 · 10 · ${new Date().getFullYear()}</div>
       <h1>Có một bất ngờ nhỏ<br>dành cho <em id="ten-goi"></em></h1>
       <div class="cham"><span class="vong"><span></span></span>Chạm vào bầu trời</div>
@@ -51,7 +54,18 @@ function trang(khoa, nguoi) {
   </section>
 
   <section id="thu">
-    <div class="khung"><article class="thu" id="la-thu"></article></div>
+    <div class="khung">
+      <div class="phong-bi" id="phong-bi">
+        <div class="pb-vo">
+          <div class="pb-sau"></div>
+          <div class="pb-truoc"><span class="pb-gui">Gửi <b id="pb-ten"></b></span></div>
+          <div class="pb-nap"></div>
+          <button class="pb-dau" id="pb-dau" type="button" aria-label="Mở thư">♥</button>
+        </div>
+        <article class="thu" id="la-thu"></article>
+      </div>
+      <p class="pb-goi-y" id="pb-goi-y">Chạm vào con dấu để mở thư</p>
+    </div>
   </section>
 
   <section id="vuon">
@@ -77,7 +91,8 @@ function trang(khoa, nguoi) {
         <span class="anh-sang"></span><span class="than-hop"></span><span class="ruy-bang-doc"></span><span class="nap"></span><span class="no"></span>
       </button>
       <div class="qua-hien" id="qua-hien" hidden>
-        <div class="the"><div class="nho">Quà của <span></span></div><p class="ten-qua"></p></div>
+        <div class="the the-cao"><div class="nho">Quà của <span></span></div><p class="ten-qua"></p><canvas class="lop-cao" id="lop-cao" aria-label="Cào để xem quà"></canvas></div>
+        <p class="cao-goi-y" id="cao-goi-y">Cào lớp kim tuyến để xem quà ✨</p>
       </div>
     </div>
   </section>
@@ -92,6 +107,16 @@ function trang(khoa, nguoi) {
     </div>
   </section>
 </main>
+
+<div class="chon" id="chon" hidden>
+  <div class="khung">
+    <div class="nho">20 · 10 · ${new Date().getFullYear()}</div>
+    <h1>Thiệp này của ai nào?</h1>
+    <p>Chạm vào mặt mình để mở thiệp riêng nhé</p>
+    <div class="ds-chon" id="ds-chon"></div>
+    <button class="nut vien" id="xem-chung" type="button">Xem thiệp chung của cả team</button>
+  </div>
+</div>
 
 <div class="lop-phu" id="lop-phu" hidden>
   <div class="the" role="dialog" aria-modal="true" aria-labelledby="the-tu">

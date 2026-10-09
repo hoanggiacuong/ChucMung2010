@@ -18,7 +18,46 @@ body.khoa{overflow:hidden;height:100vh}
 .sao{position:fixed;inset:0;pointer-events:none;z-index:0}
 .sao i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.5;animation:lap 3s ease-in-out infinite}
 @keyframes lap{50%{opacity:.08}}
-#troi{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+#troi,.giay-mau{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.sao-bang{position:absolute;width:140px;height:1.5px;border-radius:2px;transform-origin:0 50%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.95));box-shadow:0 0 6px rgba(255,255,255,.6);animation:bang 1.2s ease-out forwards}
+@keyframes bang{0%{opacity:0;transform:rotate(148deg) translateX(0) scaleX(.2)}15%{opacity:1}100%{opacity:0;transform:rotate(148deg) translateX(320px) scaleX(1)}}
+
+/* Cánh hoa rơi */
+.canh-hoa{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;opacity:0;transition:opacity 3s}
+.canh-hoa.hien{opacity:1}
+.canh-hoa i{position:absolute;top:-30px;width:var(--s);height:var(--s);animation:roi-canh var(--t) linear var(--d) infinite}
+.canh-hoa i::before{content:"";position:absolute;inset:0;border-radius:150% 0;opacity:.8;
+  background:linear-gradient(135deg,#ffd6e2,#ff7aa2 70%);animation:xoay-canh var(--x) ease-in-out infinite alternate}
+@keyframes roi-canh{to{transform:translate(var(--dx),calc(100vh + 60px))}}
+@keyframes xoay-canh{from{transform:rotate(-20deg) rotateX(0)}to{transform:rotate(200deg) rotateX(170deg)}}
+
+/* Ảnh chibi */
+.chibi{display:block;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#ffb3c7,#c9a7ff);
+  box-shadow:0 0 0 3px rgba(255,210,122,.85),0 0 30px rgba(255,122,162,.55)}
+.chibi img{width:100%;height:100%;object-fit:cover;display:block}
+.chibi span{display:flex;width:100%;height:100%;align-items:center;justify-content:center;font:700 1em var(--script);color:#fff;text-shadow:0 2px 8px rgba(120,20,60,.4)}
+.chibi-mo{width:104px;height:104px;margin:0 auto 18px;font-size:48px;animation:noi 4s ease-in-out infinite}
+@keyframes noi{50%{transform:translateY(-6px)}}
+
+/* Link chung: chọn người */
+.chon{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:24px 16px;text-align:center;
+  background:radial-gradient(120% 80% at 50% 0%,rgba(42,22,80,.92),rgba(11,7,24,.96) 65%);overflow-y:auto;transition:opacity .5s,transform .5s}
+.chon.an{opacity:0;transform:scale(1.04);pointer-events:none}
+.chon h1{font-family:var(--display);font-weight:600;font-size:clamp(28px,8vw,40px);line-height:1.2;margin:12px 0 6px}
+.chon p{margin:0;color:var(--muted)}
+.ds-chon{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 18px;margin:34px auto 34px;max-width:380px}
+.mot-nguoi{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--ink);text-decoration:none;
+  opacity:0;transform:translateY(20px) scale(.9);animation:hien-nguoi .7s cubic-bezier(.2,1.4,.4,1) forwards}
+.mot-nguoi .chibi{width:min(34vw,128px);aspect-ratio:1;font-size:min(16vw,60px);transition:transform .3s,box-shadow .3s}
+.mot-nguoi b{font:700 26px var(--script);color:var(--rose)}
+.mot-nguoi:hover .chibi,.mot-nguoi:focus-visible .chibi{transform:scale(1.07) rotate(-3deg);box-shadow:0 0 0 3px var(--gold),0 0 45px rgba(255,210,122,.8)}
+.mot-nguoi:nth-child(even):hover .chibi{transform:scale(1.07) rotate(3deg)}
+@keyframes hien-nguoi{to{opacity:1;transform:none}}
+body.roi-di .mot-nguoi:not(.chon-roi){opacity:0;transform:scale(.8);transition:.4s;animation:none}
+.mot-nguoi.chon-roi .chibi{transform:scale(1.25);box-shadow:0 0 0 4px var(--gold),0 0 70px rgba(255,210,122,1)}
+body.dang-chon{overflow:hidden}
+body.dang-chon main{visibility:hidden}
 main{position:relative;z-index:2}
 section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .khung{width:100%;max-width:520px}
@@ -53,6 +92,47 @@ section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;al
 .thu .ky b{display:block;font-family:var(--script);font-size:28px;color:var(--rose-deep);font-weight:700}
 .hien-dan{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s ease}
 .hien-dan.ro{opacity:1;transform:none}
+.thu p.hien-dan.ro{transition:none}
+.thu .ch{opacity:0;filter:blur(4px);transition:opacity .4s ease,filter .4s ease}
+.thu.viet .ch{opacity:1;filter:none}
+.thu.viet .hien-dan:not(p){opacity:1;transform:none}
+
+/* Phong thư */
+.phong-bi{position:relative;width:100%;aspect-ratio:1.45;perspective:1400px;cursor:pointer;
+  opacity:0;transform:translateY(40px) rotate(-4deg);transition:opacity 1s,transform 1.2s cubic-bezier(.2,1.3,.4,1)}
+.phong-bi.hien{opacity:1;transform:none}
+.phong-bi.hien:not(.mo){animation:dua 3.2s ease-in-out 1.2s infinite}
+@keyframes dua{0%,100%{transform:rotate(0)}50%{transform:rotate(-1.6deg) translateY(-4px)}}
+.phong-bi.xong{aspect-ratio:auto;cursor:default}
+.pb-vo{position:absolute;left:0;right:0;top:0;height:100%;transition:opacity .7s,transform .8s}
+.phong-bi.xong .pb-vo{opacity:0;transform:translateY(80px) scale(.94);pointer-events:none}
+.pb-sau{position:absolute;inset:0;border-radius:14px;background:linear-gradient(#d98ba2,#efb3c3);
+  box-shadow:0 30px 80px -20px rgba(255,122,162,.5)}
+.pb-truoc{position:absolute;inset:0;z-index:2;border-radius:14px;overflow:hidden;
+  background:linear-gradient(160deg,#ffe6ed,#f8c6d4);clip-path:polygon(0 0,50% 50%,100% 0,100% 100%,0 100%)}
+.pb-truoc::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#ffdbe5,#fbd0dc);
+  clip-path:polygon(0 100%,50% 50%,100% 100%)}
+.pb-gui{position:absolute;left:0;right:0;bottom:7%;text-align:center;color:#a54a69;font-size:14px;z-index:1}
+.pb-gui b{display:block;font:700 clamp(24px,7vw,32px)/1.1 var(--script);color:var(--rose-deep)}
+.pb-nap{position:absolute;left:0;right:0;top:0;height:52%;z-index:3;transform-origin:50% 0;
+  background:linear-gradient(180deg,#f3aec1,#ffd5e0);clip-path:polygon(0 0,100% 0,50% 100%);
+  transition:transform .9s cubic-bezier(.45,0,.2,1)}
+.phong-bi.mo .pb-nap{transform:rotateX(180deg)}
+.phong-bi.lat .pb-nap{z-index:0;filter:brightness(.88)}
+.pb-dau{position:absolute;left:50%;top:51%;width:62px;height:62px;margin:-31px 0 0 -31px;z-index:4;border:0;border-radius:50%;cursor:pointer;
+  background:radial-gradient(circle at 35% 30%,#ff8fae,#c8285e 58%,#86113e);color:#ffd9e4;font-size:26px;line-height:62px;padding:0;
+  box-shadow:0 5px 12px rgba(80,0,30,.45),inset 0 -3px 6px rgba(0,0,0,.25),inset 0 2px 4px rgba(255,255,255,.35);
+  text-shadow:0 -1px 0 rgba(0,0,0,.3);transition:transform .45s,opacity .45s}
+.pb-dau::before{content:"";position:absolute;inset:6px;border-radius:50%;border:1.5px dashed rgba(255,220,230,.55)}
+.phong-bi.hien:not(.mo) .pb-dau{animation:dap 1.6s ease-in-out infinite}
+@keyframes dap{50%{transform:scale(1.1)}}
+.phong-bi.mo .pb-dau{transform:scale(1.6) rotate(25deg);opacity:0;pointer-events:none}
+.phong-bi .thu{position:absolute;left:5%;right:5%;top:5%;height:90%;overflow:hidden;z-index:1;
+  transition:transform 1s cubic-bezier(.3,.9,.3,1)}
+.phong-bi.rut .thu{transform:translateY(-62%)}
+.phong-bi.xong .thu{position:relative;left:auto;right:auto;top:auto;height:auto;overflow:visible;transform:none;z-index:5;transition:none}
+.pb-goi-y{text-align:center;color:var(--gold);font-size:14px;margin:22px 0 0;transition:opacity .5s}
+.pb-goi-y.an{opacity:0}
 
 /* Tiêu đề phần */
 .tieu-de{text-align:center;margin-bottom:8px}
@@ -78,6 +158,8 @@ section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;al
 .vuon.mo .hoa .ten{opacity:1}
 .hoa:nth-child(even) .ten{top:calc(100% + 22px)}
 .hoa.da-doc .ten{color:var(--gold)}
+.hoa.nhun svg{animation:nhun .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes nhun{40%{transform:scale(1.12,.92)}}
 .hoa:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:8px}
 
 /* Lời chúc bật lên */
@@ -119,11 +201,21 @@ section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;al
 .qua-hien .the{transform:none;margin:0}
 .qua-hien .nho{color:#a07a8f}
 .qua-hien .ten-qua{font-family:var(--display);font-size:24px;font-weight:600;margin:8px 0 0;line-height:1.35}
+.qua-hien{animation:bat-len .6s cubic-bezier(.2,1.4,.4,1)}
+@keyframes bat-len{from{opacity:0;transform:translateY(30px) scale(.9)}}
+.the-cao{position:relative;overflow:hidden;min-height:150px;display:flex;flex-direction:column;justify-content:center;
+  box-shadow:0 20px 60px -15px rgba(255,210,122,.55)}
+.lop-cao{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;transition:opacity .8s}
+.lop-cao.xong{opacity:0;pointer-events:none}
+.cao-goi-y{color:var(--gold);font-size:14px;margin:14px 0 0}
 
 /* Kết */
 #ket{text-align:center}
-#ket h2{font-family:var(--display);font-weight:600;font-size:clamp(34px,10vw,56px);line-height:1.1;margin:10px 0}
-#ket h2 em{font-family:var(--script);font-style:normal;color:var(--rose);display:block;font-size:.8em}
+#ket h2{font-family:var(--display);font-weight:600;font-size:clamp(34px,10vw,56px);line-height:1.1;margin:10px 0;
+  background:linear-gradient(100deg,#fdf3f6 35%,#ffd27a 45%,#fff 50%,#ffd27a 55%,#fdf3f6 65%);background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:anh-kim 4s linear infinite}
+@keyframes anh-kim{from{background-position:100% 0}to{background-position:0 0}}
+#ket h2 em{font-family:var(--script);font-style:normal;color:var(--rose);-webkit-text-fill-color:var(--rose);display:block;font-size:.8em}
 #ket .anh-chung{width:100%;border-radius:16px;margin:20px 0}
 #ket .nut{margin-top:28px}
 
@@ -135,5 +227,6 @@ section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;al
 
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
-  .sao i,.cham .vong::before,.cham .vong::after,.hoa .lac,.keo-xuong b{animation:none}
+  .sao i,.cham .vong::before,.cham .vong::after,.hoa .lac,.keo-xuong b,.phong-bi,.pb-dau,#ket h2,.chibi-mo,.mot-nguoi{animation:none!important}
+  .mot-nguoi{opacity:1;transform:none}
 }
