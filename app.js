@@ -40,6 +40,36 @@
     });
   }
 
+  /* ---------- Giao diện riêng từng người: màu pháo hoa, font chữ pháo hoa, thẻ cào ---------- */
+  // Thứ tự màu giữ nguyên ý nghĩa: [chính, nhấn (đuôi pháo, pháo liễu), sáng, kem, đậm, phụ, trắng, lạnh]
+  var GIAO_DIEN = {
+    holo: {
+      mau: ["#c7a6ff", "#9ff3ff", "#ffc4f0", "#f0eaff", "#ff8ad8", "#a78bfa", "#ffffff", "#7ef0ff"],
+      chuTen: ["800", '"Unbounded", sans-serif'], chuSo: ["800", '"Unbounded", sans-serif'],
+      cao: ["#b8c6ff", "#ffd6f5", "#9ff3ff", "#e7d6ff", "#c7a6ff"], chuCao: "rgba(60,30,110,.8)"
+    },
+    neon: {
+      mau: ["#ff3df2", "#c6ff3d", "#ff9cf7", "#eaffb8", "#ff1fa8", "#8a5cff", "#ffffff", "#3dfcff"],
+      chuTen: ["800", '"Bricolage Grotesque", sans-serif'], chuSo: ["800", '"Bricolage Grotesque", sans-serif'],
+      cao: ["#1a1a1a", "#c6ff3d", "#262626", "#ff3df2", "#111111"], chuCao: "#ffffff"
+    },
+    denim: {
+      mau: ["#ffb3c7", "#ffe08a", "#cfe6ff", "#fffbe8", "#ff8fae", "#a9c9ff", "#ffffff", "#8ec5ff"],
+      chuTen: ["italic 700", '"Fraunces", serif'], chuSo: ["italic 700", '"Fraunces", serif'],
+      cao: ["#9cc7f2", "#e6f2ff", "#7fb0e6", "#fff4c9", "#8ab8ea"], chuCao: "rgba(25,50,90,.8)"
+    },
+    cherry: {
+      mau: ["#ff4d6d", "#ffc98a", "#ffb3c0", "#fff1e0", "#e01e47", "#ff8fa3", "#ffffff", "#ffd27a"],
+      chuTen: ["400", '"Pacifico", cursive'], chuSo: ["800", '"Baloo 2", sans-serif'],
+      cao: ["#ff8fa3", "#ffe1e7", "#ff4d6d", "#fff1e0", "#e01e47"], chuCao: "rgba(110,10,30,.8)"
+    }
+  };
+  var GD = GIAO_DIEN[P.phongCach] || {
+    mau: ["#ff7aa2", "#ffd27a", "#ffb3c7", "#fff1c1", "#ff5d8f", "#c9a7ff", "#ffffff", "#8fe3ff"],
+    chuTen: ["700", '"Dancing Script", cursive'], chuSo: ["700", '"Playfair Display", Georgia, serif'],
+    cao: ["#e9b949", "#fff1bf", "#d9a43a", "#ffe7a3", "#c98f2a"], chuCao: "rgba(110,60,0,.75)"
+  };
+
   /* ---------- Nội dung ---------- */
   $("#ten-goi").textContent = P.goi;
   $("#keo-chu").textContent = "Kéo xuống, có thư cho " + P.ban;
@@ -193,8 +223,8 @@
   doKichThuoc();
   window.addEventListener("resize", doKichThuoc);
 
-  var MAU = ["#ff7aa2", "#ffd27a", "#ffb3c7", "#fff1c1", "#ff5d8f", "#c9a7ff", "#ffffff", "#8fe3ff"];
-  var MAU_GIAY = ["#ff7aa2", "#ffd27a", "#c9a7ff", "#8fe3ff", "#ffffff", "#ff5d8f", "#7fe0b0"];
+  var MAU = GD.mau;
+  var MAU_GIAY = [MAU[0], MAU[1], MAU[5], MAU[7], "#ffffff", MAU[4], MAU[2]];
   var DOM = MAU.map(function (c) {
     var s = document.createElement("canvas"); s.width = s.height = 32;
     var g = s.getContext("2d"), r = g.createRadialGradient(16, 16, 0, 16, 16, 16);
@@ -374,9 +404,9 @@
     for (var y = 0; y < h; y += buoc) for (var x = 0; x < w; x += buoc) if (d[(y * w + x) * 4 + 3] > 128) ra.push({ x: x, y: y });
     return ra;
   }
-  function diemChu(chu, phong) {
+  function diemChu(chu, kieuChu) { // kieuChu: [độ đậm, họ font]
     return layDiem(function (g, w, h) {
-      var co = Math.min(h * 0.2, 190), font = function (s) { return "700 " + s + "px " + phong; };
+      var co = Math.min(h * 0.2, 190), font = function (s) { return kieuChu[0] + " " + s + "px " + kieuChu[1]; };
       g.font = font(co);
       var rong = g.measureText(chu).width;
       if (rong > w * 0.86) { co *= w * 0.86 / rong; g.font = font(co); }
@@ -411,8 +441,8 @@
 
   var fontSan = Promise.race([
     document.fonts ? Promise.all([
-      document.fonts.load('700 80px "Dancing Script"', P.tenNgan),
-      document.fonts.load('700 80px "Playfair Display"', "20·10")
+      document.fonts.load(GD.chuTen[0] + " 80px " + GD.chuTen[1], P.tenNgan),
+      document.fonts.load(GD.chuSo[0] + " 80px " + GD.chuSo[1], "20·10")
     ]) : Promise.resolve(),
     cho(2500)
   ]).catch(function () {});
@@ -425,9 +455,9 @@
       var ds = no(x, y, n, { giu: true, tocDo: 7, mau: [0, 1, 2, 3, 4, 6] });
       rung(30);
       fontSan.then(function () {
-        setTimeout(function () { tuVao(ds, diemChu(P.tenNgan, '"Dancing Script", cursive')); }, 400);
+        setTimeout(function () { tuVao(ds, diemChu(P.tenNgan, GD.chuTen)); }, 400);
         setTimeout(function () { tuVao(ds, diemTim()); tiengChuong(); rung([15, 80, 15]); }, 3700);
-        setTimeout(function () { tuVao(ds, diemChu("20·10", '"Playfair Display", Georgia, serif')); }, 6200);
+        setTimeout(function () { tuVao(ds, diemChu("20·10", GD.chuSo)); }, 6200);
         setTimeout(function () {
           thaRoi(ds); ketThucMoDau();
           banKieu("lieu", W * 0.22, H * 0.22); setTimeout(function () { banKieu("lieu", W * 0.78, H * 0.2); }, 350);
@@ -484,7 +514,7 @@
     setTimeout(function () { laThu.classList.add("viet-xong"); }, tre + 800);
   }
   function hienHetThu() { // chạm vào thư để hiện hết ngay, khỏi chờ
-    laThu.querySelectorAll(".ch, .hien-dan").forEach(function (el) { el.style.transitionDelay = "0s"; });
+    if (laThu.classList.contains("viet")) laThu.classList.add("hien-het");
   }
 
   function moThu() {
@@ -531,6 +561,8 @@
       if (!m.isIntersecting) return;
       if (id === "thu") {
         phongBi.classList.add("hien");
+      } else if (id === "vibe") {
+        $("#the-vibe").classList.add("mo");
       } else if (id === "vuon") {
         $("#vuon-hoa").classList.add("mo");
       } else if (id === "ket" && !m.target.dataset.daBan) {
@@ -539,7 +571,7 @@
       if (id !== "mo-dau") quanSat.unobserve(m.target);
     });
   }, { threshold: 0.3 });
-  ["#mo-dau", "#thu", "#vuon", "#ket"].forEach(function (s) { quanSat.observe($(s)); });
+  ["#mo-dau", "#thu", "#vibe", "#vuon", "#ket"].forEach(function (s) { quanSat.observe($(s)); });
 
   function banLoat(n) { for (var k = 0; k < n; k++) setTimeout(banNgauNhien, k * 450); }
 
@@ -558,6 +590,74 @@
     setTimeout(function () { giayHaiBen(); tiengChuong(); rung([20, 60, 20, 60, 40]); dangDien = false; }, 4900);
   }
   $("#ban-lai").addEventListener("click", function () { if (!nhacBat && !am) batNhac(); phaoKetThuc(); });
+
+  /* ---------- Sticker kéo thả ---------- */
+  function dinhSticker(chuoi, noi, viTriCss) {
+    chuoi.forEach(function (chu, k) {
+      var el = document.createElement("button");
+      el.type = "button"; el.className = "sticker"; el.textContent = chu;
+      el.style.cssText = viTriCss[k] + ";--xoay:" + ngauNhien(-14, 14).toFixed(1) + "deg;animation-delay:" + (0.3 + k * 0.25) + "s";
+      noi.appendChild(el);
+      var dx = 0, dy = 0, bd = null;
+      el.addEventListener("pointerdown", function (e) {
+        e.stopPropagation();
+        bd = { x: e.clientX - dx, y: e.clientY - dy };
+        el.classList.add("keo");
+        try { el.setPointerCapture(e.pointerId); } catch (x) {}
+      });
+      el.addEventListener("pointermove", function (e) {
+        if (!bd) return;
+        dx = e.clientX - bd.x; dy = e.clientY - bd.y;
+        el.style.translate = dx + "px " + dy + "px";
+      });
+      ["pointerup", "pointercancel"].forEach(function (t) {
+        el.addEventListener(t, function () { bd = null; el.classList.remove("keo"); });
+      });
+      el.addEventListener("click", function (e) { e.stopPropagation(); });
+    });
+  }
+  if (P.nhan && P.nhan.length) {
+    dinhSticker(P.nhan.slice(0, 2), $("#mo-dau-chu"), ["left:-8px;top:-6px", "right:-8px;top:64px"]);
+    dinhSticker(P.nhan.slice(2, 4), $("#thu .khung"), ["left:-6px;top:-18px", "right:-6px;bottom:-14px"]);
+  }
+
+  /* ---------- Băng chữ chạy ---------- */
+  (function () {
+    var ten = P.tenNgan.toUpperCase(), cum = ["HAPPY 20.10", ten].concat(P.nhan || ["XINH ĐẸP", "HẠNH PHÚC"]);
+    var mot = cum.map(function (c) { return "<span>" + esc(c) + "</span><i>✦</i>"; }).join("");
+    var hai = (mot + mot + mot);
+    document.querySelectorAll(".bang .chay").forEach(function (el) { el.innerHTML = hai + hai; });
+  })();
+
+  /* ---------- Thẻ nhân vật (vibe check) ---------- */
+  if (P.vibe) {
+    $("#vibe").hidden = false;
+    $("#tv-hiem").textContent = P.vibe.hiem || "SSR";
+    $("#tv-emoji").textContent = P.vibe.emoji || "✨";
+    if (P.chibi) $("#tv-anh").src = P.chibi; else $("#tv-anh").parentNode.hidden = true;
+    $("#tv-ten").textContent = P.tenNgan;
+    $("#tv-danh-hieu").textContent = P.vibe.danhHieu || "";
+    $("#tv-chi-so").innerHTML = (P.vibe.chiSo || []).map(function (c, k) {
+      var vo = c[1] === "∞" || +c[1] > 100, pt = vo ? 100 : Math.max(0, +c[1] || 0);
+      return '<div class="cs' + (vo ? " vo-cuc" : "") + '"><span>' + esc(c[0]) + "</span><b>" + esc(c[1]) + "</b>" +
+        '<i><u style="width:' + pt + "%;transition-delay:" + (0.4 + k * 0.35) + 's"></u></i></div>';
+    }).join("");
+    var tv = $("#the-vibe");
+    tv.addEventListener("pointermove", function (e) {
+      var r = tv.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      tv.classList.add("nghieng");
+      tv.style.setProperty("--rx", ((0.5 - y) * 22).toFixed(1) + "deg");
+      tv.style.setProperty("--ry", ((x - 0.5) * 26).toFixed(1) + "deg");
+      tv.style.setProperty("--gx", (x * 100).toFixed(0) + "%");
+      tv.style.setProperty("--gy", (y * 100).toFixed(0) + "%");
+    });
+    tv.addEventListener("pointerleave", function () { tv.classList.remove("nghieng"); });
+    tv.addEventListener("click", function () {
+      var r = tv.getBoundingClientRect();
+      no(r.left + r.width / 2, r.top + r.height * 0.3, 70, { tocDo: 4, mau: [0, 1, 6], imLang: true, trongLuc: 0.05 });
+      tiengChuong(); rung(15);
+    });
+  }
 
   /* ---------- Vườn hoa ---------- */
   var CAP_MAU = [["#ff7aa2", "#e0457b"], ["#ffd27a", "#ff9f43"], ["#c9a7ff", "#8b5cf6"], ["#8fe3ff", "#3aa0d8"], ["#ffb3c7", "#ff5d8f"], ["#fff1c1", "#ffc857"]];
@@ -648,13 +748,13 @@
     lopCao.width = Math.round(w * dpr); lopCao.height = Math.round(h * dpr);
     bc.setTransform(dpr, 0, 0, dpr, 0, 0);
     var g = bc.createLinearGradient(0, 0, w, h);
-    g.addColorStop(0, "#e9b949"); g.addColorStop(0.3, "#fff1bf"); g.addColorStop(0.5, "#d9a43a"); g.addColorStop(0.75, "#ffe7a3"); g.addColorStop(1, "#c98f2a");
+    [0, 0.3, 0.5, 0.75, 1].forEach(function (d, k) { g.addColorStop(d, GD.cao[k]); });
     bc.fillStyle = g; bc.fillRect(0, 0, w, h);
     for (var k = 0; k < w * h / 40; k++) { // hạt kim tuyến
       bc.fillStyle = Math.random() < 0.5 ? "rgba(255,255,255," + ngauNhien(0.2, 0.7) + ")" : "rgba(150,90,10," + ngauNhien(0.1, 0.3) + ")";
       bc.fillRect(Math.random() * w, Math.random() * h, ngauNhien(0.8, 2), ngauNhien(0.8, 2));
     }
-    bc.fillStyle = "rgba(110,60,0,.75)"; bc.textAlign = "center"; bc.textBaseline = "middle";
+    bc.fillStyle = GD.chuCao; bc.textAlign = "center"; bc.textBaseline = "middle";
     bc.font = "600 16px 'Be Vietnam Pro', sans-serif"; bc.fillText("✨ Cào ở đây ✨", w / 2, h / 2);
     bc.globalCompositeOperation = "destination-out"; bc.lineCap = bc.lineJoin = "round"; bc.lineWidth = 38;
   }

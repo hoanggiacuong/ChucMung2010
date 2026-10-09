@@ -16,7 +16,9 @@ Thiệp 20/10 cho chị em trong công ty: pháo hoa tụ thành tên, phong th�
 2. Chạy `node tao-trang.js` để tạo lại các trang `.html`
 3. Commit và push, khoảng 1–2 phút sau GitHub Pages cập nhật
 
-Ảnh chibi: hiện đang là ảnh vẽ tạm `anh/chibi-*.svg`. Thay bằng ảnh thật (ảnh vuông, khoảng 400×400) rồi sửa trường `chibi` trong `data.js`.
+Ảnh chibi: `anh/chibi-*.jpg` (ảnh vuông 400×400). Đổi ảnh thì thay file và sửa trường `chibi` trong `data.js`.
+
+Mỗi người có giao diện riêng (`phongCach` trong `data.js`): `holo` (Y2K ánh kim), `neon` (đen + neon), `denim` (pastel hoa cúc), `cherry` (cherry cola). Sticker kéo thả nằm ở `nhan`, thẻ nhân vật nằm ở `vibe`.
 
 Ảnh: bỏ vào thư mục `anh/` rồi ghi đường dẫn vào `data.js` (ví dụ `anh: "anh/ngan.jpg"`). Nên thu nhỏ ảnh còn chiều rộng khoảng 1000px.
 

@@ -6,6 +6,13 @@ const path = require("path");
 const THIEP = require("./data.js");
 
 const phienBan = Date.now().toString(36); // chống trình duyệt trong Telegram giữ bản cũ
+// Font riêng cho từng giao diện (đều có dấu tiếng Việt)
+const FONT = {
+  holo: "&family=Unbounded:wght@500;700;800",
+  neon: "&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Mono:wght@400;700",
+  denim: "&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500;1,9..144,700&family=Lexend:wght@400;500;600",
+  cherry: "&family=Baloo+2:wght@500;700;800&family=Pacifico"
+};
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
 function trang(khoa, nguoi) {
@@ -33,10 +40,10 @@ function trang(khoa, nguoi) {
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💐</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600${FONT[nguoi.phongCach] || ""}&display=swap">
 <link rel="stylesheet" href="style.css?v=${phienBan}">
 </head>
-<body class="khoa">
+<body class="khoa${nguoi.phongCach ? " kieu-" + nguoi.phongCach : ""}">
 <div class="sao" id="sao"></div>
 <canvas id="troi" aria-hidden="true"></canvas>
 <div class="canh-hoa" id="canh-hoa" aria-hidden="true"></div>
@@ -65,6 +72,31 @@ function trang(khoa, nguoi) {
         <article class="thu" id="la-thu"></article>
       </div>
       <p class="pb-goi-y" id="pb-goi-y">Chạm vào con dấu để mở thư</p>
+    </div>
+  </section>
+
+  <div class="bang-chu" aria-hidden="true">
+    <div class="bang bang-1"><div class="chay"></div></div>
+    <div class="bang bang-2"><div class="chay"></div></div>
+  </div>
+
+  <section id="vibe" hidden>
+    <div class="khung">
+      <div class="tieu-de">
+        <div class="nho">Vibe check</div>
+        <h2>Thẻ nhân vật</h2>
+        <p>Rê tay lên thẻ để thấy ánh kim nhé</p>
+      </div>
+      <div class="the-vibe" id="the-vibe">
+        <div class="tv-trong">
+          <div class="tv-dau"><span class="tv-hiem" id="tv-hiem"></span><span>20.10 · LIMITED</span><span class="tv-emoji" id="tv-emoji"></span></div>
+          <div class="tv-anh"><img id="tv-anh" alt=""></div>
+          <div class="tv-ten" id="tv-ten"></div>
+          <div class="tv-danh-hieu" id="tv-danh-hieu"></div>
+          <div class="tv-chi-so" id="tv-chi-so"></div>
+        </div>
+        <div class="tv-bong"></div>
+      </div>
     </div>
   </section>
 

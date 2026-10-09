@@ -8,6 +8,9 @@
 //   chibi:  ảnh mặt/chibi để chọn ở link chung (index.html), ví dụ "anh/chibi-ngan.png"
 //           (để trống thì hiện chữ cái đầu tên)
 //   qua:    phần quà trong hộp (để trống "" thì ẩn phần bốc quà)
+//   phongCach: giao diện riêng: "holo" (Y2K ánh kim), "neon" (đen + neon), "denim" (pastel hoa cúc), "cherry" (cherry cola)
+//   nhan:   4 sticker kéo thả được (2 cái ở màn mở đầu, 2 cái quanh lá thư), chữ cũng chạy trên băng chữ
+//   vibe:   thẻ nhân vật: danhHieu, emoji, hiem (độ hiếm), chiSo: [tên, số 0-100 hoặc "∞"]
 // Dùng được cả trên trình duyệt (window.THIEP) lẫn trong node (module.exports).
 var THIEP = {
   // Địa chỉ trang sau khi lên GitHub Pages, dùng cho ảnh xem trước trên Telegram
@@ -41,7 +44,10 @@ var THIEP = {
         "20/10 này chúc chị thật nhiều sức khoẻ, luôn xinh đẹp, cười nhiều hơn và bớt phải nhắc tụi em nộp việc đúng hạn 😄"
       ],
       anh: "",
-      chibi: "anh/chibi-ngan.svg",
+      chibi: "anh/chibi-ngan.jpg",
+      phongCach: "holo",
+      nhan: ["slay ✨", "it girl 💅", "main character", "10/10 ⭐"],
+      vibe: { danhHieu: "Nữ hoàng bình tĩnh", emoji: "🦋", hiem: "SSR", chiSo: [["Độ xinh", 100], ["Bình tĩnh khi deadline dí", 99], ["Nhắc team nộp việc", "∞"]] },
       qua: "Một buổi spa thư giãn trọn gói 💆‍♀️"
     },
     thao: {
@@ -54,7 +60,10 @@ var THIEP = {
         "Chúc chị 20/10 ngập tràn hoa và quà, luôn trẻ trung, xinh đẹp, gia đình êm ấm và mọi điều mong ước đều thành."
       ],
       anh: "",
-      chibi: "anh/chibi-thao.svg",
+      chibi: "anh/chibi-thao.jpg",
+      phongCach: "neon",
+      nhan: ["VIBE CHECK ✅", "✌️ peace", "no cap", "đỉnh nóc kịch trần"],
+      vibe: { danhHieu: "Cứu tinh của team", emoji: "⚡", hiem: "UR", chiSo: [["Độ cool", 100], ["Sẵn lòng giúp đỡ", 100], ["Kiên nhẫn với câu hỏi ngớ ngẩn", "∞"]] },
       qua: "Một bó hoa tươi giao tận bàn mỗi thứ Hai trong tháng 💐"
     },
     quyen: {
@@ -67,7 +76,10 @@ var THIEP = {
         "Chúc Quyên 20/10 thật vui, công việc thuận lợi, và năm nay đi du lịch được thật nhiều nơi mình thích."
       ],
       anh: "",
-      chibi: "anh/chibi-quyen.svg",
+      chibi: "anh/chibi-quyen.jpg",
+      phongCach: "denim",
+      nhan: ["soft era ☁️", "daisy girl 🌼", "chill thôi", "certified cutie"],
+      vibe: { danhHieu: "Trạm phát năng lượng", emoji: "🌼", hiem: "SSR", chiSo: [["Năng lượng", 100], ["Độ dễ thương", 100], ["Số nơi muốn đi du lịch", "∞"]] },
       qua: "Voucher trà sữa cả tháng 🧋"
     },
     quynhanh: {
@@ -80,19 +92,21 @@ var THIEP = {
         "Chúc em 20/10 thật nhiều niềm vui, học được thật nhiều, luôn xinh xắn và được cả team cưng như giờ nhé!"
       ],
       anh: "",
-      chibi: "anh/chibi-quynhanh.svg",
+      chibi: "anh/chibi-quynhanh.jpg",
+      phongCach: "cherry",
+      nhan: ["em út vibes 🍒", "cười xỉu 😆", "trà sữa time 🧋", "cưng xỉu"],
+      vibe: { danhHieu: "Em út quốc dân", emoji: "🍒", hiem: "UR", chiSo: [["Độ nhiệt tình", 100], ["Nụ cười tỏa nắng", 100], ["Được cả team cưng", "∞"]] },
       qua: "Được về sớm một buổi chiều tự chọn 🏃‍♀️"
     }
   },
 
   // Vườn hoa: mỗi anh em một bông, chạm vào để đọc
   loiChucTeam: [
+    { tu: "Sếp Bộ", loi: "Cảm ơn chị em đã luôn đồng hành và giữ lửa cho công ty. Chúc mọi người 20/10 thật hạnh phúc, khoẻ mạnh và thành công." },
+    { tu: "Anh Nghĩa", loi: "Chúc các chị em luôn xinh đẹp, vui vẻ, công việc suôn sẻ và ngày nào cũng được cưng như hôm nay." },
     { tu: "Cường", loi: "Chúc chị em luôn vui, khoẻ và xinh đẹp. Văn phòng có mọi người mới thành nhà!" },
-    { tu: "Team Dev", loi: "Bug thì còn fix được chứ chị em mà nghỉ là team sập. Chúc 20/10 thật vui!" },
-    { tu: "Team Art", loi: "Vẽ cả trăm cái bánh cũng không xinh bằng chị em mình. Chúc luôn rạng rỡ!" },
-    { tu: "Team Game Design", loi: "Chúc chị em một năm toàn level dễ, phần thưởng to và không có màn boss nào." },
-    { tu: "Team Marketing", loi: "Chỉ số yêu thương dành cho chị em luôn tăng trưởng 100% mỗi ngày!" },
-    { tu: "Sếp", loi: "Cảm ơn chị em đã đồng hành cùng công ty. Chúc mọi người luôn hạnh phúc và thành công." }
+    { tu: "Sơn", loi: "Chúc chị em 20/10 nhận thật nhiều hoa, nhiều quà, cười thật nhiều và bớt deadline đi một chút." },
+    { tu: "Nghiệp", loi: "Chúc chị em luôn rạng rỡ, mọi điều mong ước đều thành, và mãi là những bông hoa đẹp nhất của team." }
   ]
 };
 

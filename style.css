@@ -95,6 +95,7 @@ section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;al
 .thu p.hien-dan.ro{transition:none}
 .thu .ch{opacity:0;filter:blur(4px);transition:opacity .4s ease,filter .4s ease}
 .thu.viet .ch{opacity:1;filter:none}
+.thu.hien-het .ch,.thu.hien-het .hien-dan{transition:none!important;opacity:1;filter:none;transform:none}
 .thu.viet .hien-dan:not(p){opacity:1;transform:none}
 
 /* Phong thư */
@@ -229,4 +230,209 @@ section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;al
   html{scroll-behavior:auto}
   .sao i,.cham .vong::before,.cham .vong::after,.hoa .lac,.keo-xuong b,.phong-bi,.pb-dau,#ket h2,.chibi-mo,.mot-nguoi{animation:none!important}
   .mot-nguoi{opacity:1;transform:none}
+}
+
+/* ================= Sticker kéo thả ================= */
+.mo-dau-chu{position:relative}
+#thu .khung{position:relative}
+.sticker{position:absolute;z-index:6;padding:7px 14px;border-radius:999px;border:2px solid #fff;background:var(--rose);color:#fff;
+  font:700 13px/1.1 var(--body);white-space:nowrap;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;
+  rotate:var(--xoay);box-shadow:0 6px 16px rgba(0,0,0,.35);animation:dan .6s cubic-bezier(.2,1.6,.4,1) both;transition:scale .15s,box-shadow .15s}
+.sticker.keo{cursor:grabbing;scale:1.12;box-shadow:0 16px 30px rgba(0,0,0,.45)}
+@keyframes dan{from{opacity:0;scale:2.2}}
+#thu .sticker{opacity:0;pointer-events:none;animation:none}
+#thu .phong-bi.xong ~ .sticker{opacity:1;pointer-events:auto;animation:dan .6s cubic-bezier(.2,1.6,.4,1) both}
+
+/* ================= Băng chữ chạy ================= */
+.bang-chu{position:relative;z-index:2;height:150px;margin:-20px 0;overflow:hidden;pointer-events:none}
+.bang{position:absolute;left:-10%;right:-10%;top:50%;padding:11px 0;white-space:nowrap;overflow:hidden;background:var(--rose);color:#fff;
+  font:800 19px/1 var(--display);letter-spacing:.03em;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bang-1{transform:translateY(-50%) rotate(-4deg);z-index:1}
+.bang-2{transform:translateY(-50%) rotate(3deg);background:var(--gold);color:#2a1630}
+.chay{display:inline-flex;gap:18px;align-items:center;padding-right:18px;animation:chay 40s linear infinite}
+.bang-2 .chay{animation-direction:reverse;animation-duration:48s}
+.chay i{font-style:normal;opacity:.75}
+@keyframes chay{to{transform:translateX(-50%)}}
+
+/* ================= Thẻ nhân vật ================= */
+#vibe .khung{max-width:380px}
+.the-vibe{--tv-nen:#1c1030;--tv-chu:#fff;--tv-ray:rgba(255,255,255,.14);--tv-vien:linear-gradient(135deg,#ff9de2,#9ff3ff,#ffd27a,#ff9de2);
+  position:relative;margin:28px auto 0;width:min(100%,310px);aspect-ratio:5/7.3;border-radius:22px;padding:4px;cursor:pointer;background:var(--tv-vien);
+  transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .6s ease;
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.6),0 0 50px -10px var(--rose);animation:lac-the 6s ease-in-out infinite}
+.the-vibe.nghieng{animation:none;transition:transform .08s}
+@keyframes lac-the{0%,100%{transform:perspective(900px) rotateY(-9deg) rotateX(4deg)}50%{transform:perspective(900px) rotateY(9deg) rotateX(-3deg)}}
+.tv-trong{position:relative;height:100%;border-radius:18px;overflow:hidden;background:var(--tv-nen);color:var(--tv-chu);padding:13px 15px 15px;display:flex;flex-direction:column;gap:7px}
+.tv-dau{display:flex;justify-content:space-between;align-items:center;font:700 10px var(--body);letter-spacing:.14em;opacity:.9}
+.tv-hiem{padding:3px 9px;border-radius:6px;background:var(--gold);color:#1a0f2a;letter-spacing:.06em;font-size:12px}
+.tv-emoji{font-size:20px;letter-spacing:0}
+.tv-anh{flex:1;min-height:0;border-radius:14px;overflow:hidden;border:2px solid var(--tv-ray)}
+.tv-anh img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+.tv-ten{font:800 28px/1.05 var(--display);margin-top:3px}
+.tv-danh-hieu{font-size:13px;color:var(--rose);font-weight:700;margin-top:-3px}
+.tv-chi-so{display:grid;gap:6px;margin-top:2px}
+.cs{display:grid;grid-template-columns:1fr auto;gap:3px 8px;font-size:11.5px;line-height:1.25;align-items:center}
+.cs b{font:800 13px var(--body)}
+.cs i{grid-column:1/-1;height:6px;border-radius:9px;background:var(--tv-ray);overflow:hidden}
+.cs u{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--rose),var(--gold));transform-origin:left;transform:scaleX(0);transition:transform 1.3s cubic-bezier(.2,1,.3,1)}
+.the-vibe.mo .cs u{transform:scaleX(1)}
+.cs.vo-cuc u{background:linear-gradient(90deg,#ff7aa2,#ffd27a,#7fe0b0,#8fe3ff,#c9a7ff,#ff7aa2);background-size:200% 100%;animation:cau-vong 2s linear infinite}
+.cs.vo-cuc b{font-size:17px;line-height:.8}
+@keyframes cau-vong{to{background-position:-200% 0}}
+.tv-bong{position:absolute;inset:4px;border-radius:18px;pointer-events:none;mix-blend-mode:overlay;opacity:.35;transition:opacity .3s;
+  background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.8),transparent 45%),
+    linear-gradient(115deg,transparent 30%,rgba(255,157,226,.5) 45%,rgba(159,243,255,.5) 55%,transparent 70%)}
+.the-vibe.nghieng .tv-bong{opacity:.9}
+
+/* ================= 1. Y2K Holo (Ngân) ================= */
+body.kieu-holo{--night:#0c0a1d;--night-2:#2a1f5c;--ink:#f4f0ff;--muted:#b9b0e0;--rose:#c7a6ff;--rose-deep:#7c4dff;--gold:#9ff3ff;
+  --paper:#f7f4ff;--paper-ink:#2a1f4a;--display:"Unbounded",sans-serif;--script:"Unbounded",sans-serif;
+  background:radial-gradient(55% 35% at 12% 8%,rgba(159,243,255,.2),transparent 70%),radial-gradient(50% 40% at 92% 28%,rgba(255,157,226,.2),transparent 70%),
+    radial-gradient(120% 80% at 50% 0%,var(--night-2),var(--night) 62%);background-color:var(--night);background-attachment:fixed}
+.kieu-holo .mo-dau-chu h1 em,.kieu-holo .thu .chao,.kieu-holo .pb-gui b,.kieu-holo .tv-ten{
+  background:linear-gradient(90deg,#ff9de2,#9ff3ff,#c7a6ff,#ff9de2);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:cau-vong 5s linear infinite}
+.kieu-holo .thu .chao{background-image:linear-gradient(90deg,#d63fb0,#2bb3d6,#7c4dff,#d63fb0)}
+.kieu-holo .mo-dau-chu h1{font-weight:700;font-size:clamp(23px,6.4vw,36px);letter-spacing:-.01em;line-height:1.25}
+.kieu-holo .mo-dau-chu h1 em{font-weight:800;font-size:1.25em;margin-top:8px}
+.kieu-holo h2,.kieu-holo #ket h2{font-weight:700;letter-spacing:-.01em}
+.kieu-holo .tieu-de h2{font-size:clamp(21px,6vw,30px)}
+.kieu-holo #ket h2{font-size:clamp(30px,9vw,50px)}
+.kieu-holo #ket h2 em{font-size:.55em;margin-bottom:8px}
+.kieu-holo .thu{background:linear-gradient(135deg,#fdfbff,#f1ecff 55%,#eafbff)}
+.kieu-holo .thu::before{border:2px solid transparent;background:linear-gradient(120deg,#ff9de2,#9ff3ff,#c7a6ff) border-box;
+  -webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.kieu-holo .thu .chao{font-weight:800;font-size:25px;line-height:1.3}
+.kieu-holo .thu .ky b{font:800 22px var(--display);color:var(--rose-deep)}
+.kieu-holo .pb-sau{background:linear-gradient(#9c86e0,#c4b2f5)}
+.kieu-holo .pb-truoc{background:linear-gradient(160deg,#f5f1ff,#d9ccff)}
+.kieu-holo .pb-truoc::before{background:linear-gradient(0deg,#ece5ff,#e1d8ff)}
+.kieu-holo .pb-nap{background:linear-gradient(180deg,#c3afff,#ece4ff)}
+.kieu-holo .pb-dau{background:radial-gradient(circle at 35% 30%,#fff,#d6def0 40%,#8d97ba 78%);color:#7c4dff;text-shadow:none}
+.kieu-holo .pb-gui{color:#7a6aa8}
+.kieu-holo .pb-gui b{font:800 22px/1.2 var(--display);background-image:linear-gradient(90deg,#d63fb0,#2bb3d6,#7c4dff,#d63fb0)}
+.kieu-holo .sticker{background:linear-gradient(120deg,#ffc4f0,#9ff3ff,#d9c6ff);color:#2a1f4a;font-family:var(--display);font-size:11.5px;letter-spacing:.02em}
+.kieu-holo .bang-1{background:linear-gradient(90deg,#ffc4f0,#9ff3ff,#d9c6ff,#ffc4f0);color:#2a1f4a}
+.kieu-holo .bang-2{background:#120e2b;color:#9ff3ff;border-block:1px solid rgba(159,243,255,.4)}
+.kieu-holo .canh-hoa i::before{border-radius:0;opacity:.95;background:linear-gradient(135deg,#fff,#9ff3ff 45%,#ffc4f0);
+  clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%)}
+.kieu-holo .the-vibe{--tv-nen:linear-gradient(165deg,#221a4d,#140f30);--tv-vien:linear-gradient(135deg,#ffc4f0,#9ff3ff,#c7a6ff,#ffc4f0)}
+.kieu-holo .tv-danh-hieu{color:#9ff3ff}
+.kieu-holo .nut{background:linear-gradient(120deg,#c7a6ff,#7ef0ff);color:#1d1640;box-shadow:0 10px 30px -8px rgba(126,240,255,.6)}
+.kieu-holo .chibi{box-shadow:0 0 0 3px #e9e1ff,0 0 34px rgba(159,243,255,.6)}
+
+/* ================= 2. Neon Acid (Thảo) ================= */
+body.kieu-neon{--night:#060606;--night-2:#111;--ink:#f2f2f2;--muted:#9a9a9a;--rose:#ff3df2;--rose-deep:#ff1fa8;--gold:#c6ff3d;
+  --paper:#0f0f0f;--paper-ink:#ececec;--display:"Bricolage Grotesque",sans-serif;--script:"Bricolage Grotesque",sans-serif;--body:"Space Mono",ui-monospace,monospace;
+  font-size:15px;background:#060606;
+  background-image:linear-gradient(rgba(198,255,61,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(198,255,61,.055) 1px,transparent 1px);
+  background-size:34px 34px;background-attachment:fixed}
+.kieu-neon .mo-dau-chu h1{font-weight:800;letter-spacing:-.03em;text-transform:uppercase;font-size:clamp(30px,9vw,50px);line-height:.98}
+.kieu-neon .mo-dau-chu h1 em{color:var(--gold);font-size:1.2em;margin-top:10px;text-shadow:0 0 18px rgba(198,255,61,.7)}
+.kieu-neon h2,.kieu-neon .tieu-de h2{font-weight:800;letter-spacing:-.03em;text-transform:uppercase}
+.kieu-neon #ket h2{font-weight:800;text-transform:uppercase;letter-spacing:-.03em}
+.kieu-neon #ket h2 em{-webkit-text-fill-color:var(--rose);text-shadow:0 0 22px rgba(255,61,242,.6)}
+.kieu-neon .thu{background:#0f0f0f;border:2px solid var(--gold);border-radius:6px;box-shadow:8px 8px 0 var(--rose)}
+.kieu-neon .thu::before{display:none}
+.kieu-neon .thu .chao{font-weight:800;font-size:30px;color:var(--gold);text-transform:uppercase;letter-spacing:-.02em}
+.kieu-neon .thu p{font-size:14.5px;line-height:1.7}
+.kieu-neon .thu .ky{color:#888}
+.kieu-neon .thu .ky b{font-weight:800;font-size:26px;color:var(--rose)}
+.kieu-neon .pb-sau{background:#151515;box-shadow:0 0 0 1.5px #c6ff3d,0 0 22px rgba(198,255,61,.4)}
+.kieu-neon .pb-truoc{background:linear-gradient(160deg,#232323,#171717)}
+.kieu-neon .pb-truoc::before{background:#1e1e1e}
+.kieu-neon .pb-nap{background:linear-gradient(180deg,#2b2b2b,#1b1b1b)}
+.kieu-neon .pb-dau{background:radial-gradient(circle at 35% 30%,#e5ff9a,#c6ff3d 55%,#8fbf10);color:#060606;text-shadow:none;box-shadow:0 0 22px rgba(198,255,61,.6)}
+.kieu-neon .pb-dau::before{border-color:rgba(0,0,0,.35)}
+.kieu-neon .pb-gui{color:#8a8a8a}
+.kieu-neon .pb-gui b{font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:-.02em}
+.kieu-neon .sticker{border-radius:6px;border-color:#000;background:var(--gold);color:#000;box-shadow:4px 4px 0 var(--rose);text-transform:uppercase;font-size:12px}
+.kieu-neon .sticker:nth-of-type(even){background:var(--rose);color:#fff;box-shadow:4px 4px 0 var(--gold)}
+.kieu-neon .bang{font-size:22px;letter-spacing:-.01em}
+.kieu-neon .bang-1{background:var(--gold);color:#000}
+.kieu-neon .bang-2{background:var(--rose);color:#fff}
+.kieu-neon .canh-hoa i::before{border-radius:0;opacity:.9;background:var(--gold);
+  clip-path:polygon(40% 0,60% 0,60% 40%,100% 40%,100% 60%,60% 60%,60% 100%,40% 100%,40% 60%,0 60%,0 40%,40% 40%)}
+.kieu-neon .canh-hoa i:nth-child(odd)::before{background:var(--rose)}
+.kieu-neon .the-vibe{--tv-nen:#0d0d0d;--tv-vien:linear-gradient(135deg,#c6ff3d,#ff3df2);border-radius:10px}
+.kieu-neon .tv-trong,.kieu-neon .tv-bong{border-radius:7px}
+.kieu-neon .tv-ten{text-transform:uppercase;color:var(--gold)}
+.kieu-neon .nut{background:var(--gold);color:#000;border-radius:6px;box-shadow:5px 5px 0 var(--rose);font-family:var(--body);text-transform:uppercase}
+.kieu-neon .the{border-radius:8px}
+.kieu-neon .chibi{box-shadow:0 0 0 3px var(--gold),0 0 34px rgba(255,61,242,.6)}
+
+/* ================= 3. Soft Denim & Daisy (Quyên) ================= */
+body.kieu-denim{--night:#0e1b36;--night-2:#2f528f;--ink:#f3f7ff;--muted:#b9cae8;--rose:#ffb3c7;--rose-deep:#3a6fb5;--gold:#ffe08a;
+  --paper:#fffdf6;--paper-ink:#23324d;--display:"Fraunces",Georgia,serif;--script:"Fraunces",Georgia,serif;--body:"Lexend",system-ui,sans-serif;
+  background:radial-gradient(40% 25% at 20% 12%,rgba(255,255,255,.1),transparent 70%),radial-gradient(35% 22% at 85% 30%,rgba(255,255,255,.07),transparent 70%),
+    radial-gradient(120% 80% at 50% 0%,var(--night-2),var(--night) 65%);background-color:var(--night);background-attachment:fixed}
+.kieu-denim .mo-dau-chu h1 em,.kieu-denim #ket h2 em{font-style:italic;font-weight:700;color:var(--gold);-webkit-text-fill-color:var(--gold)}
+.kieu-denim .tieu-de h2{font-style:italic}
+.kieu-denim .thu{background:repeating-linear-gradient(180deg,transparent 0 27px,#dce8f8 27px 28px),var(--paper);background-position:0 20px;
+  padding-left:52px;border-radius:6px}
+.kieu-denim .thu::before{inset:0 auto 0 36px;width:0;border:0;border-left:1.5px solid rgba(232,106,146,.4);border-radius:0}
+.kieu-denim .phong-bi.xong .thu::after{content:"";position:absolute;top:-13px;left:50%;width:120px;height:28px;margin-left:-60px;
+  background:repeating-linear-gradient(45deg,rgba(255,224,138,.92) 0 8px,rgba(255,243,200,.92) 8px 16px);transform:rotate(-3deg);box-shadow:0 2px 5px rgba(0,0,0,.12)}
+.kieu-denim .thu .chao{font-style:italic;font-weight:700;font-size:30px;color:#3a6fb5}
+.kieu-denim .thu p{line-height:28px;font-size:15.5px}
+.kieu-denim .thu .ky b{font:italic 700 26px var(--display);color:#3a6fb5}
+.kieu-denim .pb-sau{background:linear-gradient(#5f8cc6,#86aee0)}
+.kieu-denim .pb-truoc{background:linear-gradient(160deg,#e0ecfc,#b8d2f2)}
+.kieu-denim .pb-truoc::before{background:linear-gradient(0deg,#d3e4f8,#c6dbf5)}
+.kieu-denim .pb-nap{background:linear-gradient(180deg,#95bbe8,#d8e7fa)}
+.kieu-denim .pb-dau{background:radial-gradient(circle at 35% 30%,#fff6d0,#ffd45e 55%,#e0a417);color:#fff}
+.kieu-denim .pb-gui{color:#4f6f9e}
+.kieu-denim .pb-gui b{font:italic 700 26px/1.1 var(--display);color:#3a6fb5}
+.kieu-denim .sticker{background:var(--paper);color:#23324d;border:2px dashed #8ec5ff;font-weight:600}
+.kieu-denim .sticker:nth-of-type(even){background:var(--gold);border-color:#fff}
+.kieu-denim .bang{font:italic 700 21px/1 var(--display);text-transform:none;letter-spacing:0}
+.kieu-denim .bang-1{background:#8ec5ff;color:#0e1b36}
+.kieu-denim .bang-2{background:var(--gold);color:#23324d}
+.kieu-denim .canh-hoa i{width:calc(var(--s) * 1.4);height:calc(var(--s) * 1.4)}
+.kieu-denim .canh-hoa i::before{border-radius:50%;opacity:.9;
+  background:radial-gradient(circle,#ffd45e 0 20%,transparent 22%),repeating-conic-gradient(#fff 0 20deg,transparent 22deg 36deg);
+  -webkit-mask:radial-gradient(circle,#000 62%,transparent 64%);mask:radial-gradient(circle,#000 62%,transparent 64%)}
+.kieu-denim .the-vibe{--tv-nen:#fffdf6;--tv-chu:#23324d;--tv-ray:rgba(35,50,77,.12);--tv-vien:linear-gradient(135deg,#8ec5ff,#ffe08a,#ffb3c7)}
+.kieu-denim .tv-ten{font-style:italic;color:#3a6fb5}
+.kieu-denim .tv-danh-hieu{color:#e86a92}
+.kieu-denim .cs u{background:linear-gradient(90deg,#8ec5ff,#3a6fb5)}
+.kieu-denim .nut{background:var(--gold);color:#23324d;box-shadow:0 10px 30px -8px rgba(255,224,138,.6)}
+.kieu-denim .chibi{box-shadow:0 0 0 3px var(--paper),0 0 34px rgba(142,197,255,.6)}
+
+/* ================= 4. Cherry Cola (Quỳnh Anh) ================= */
+body.kieu-cherry{--night:#1c070d;--night-2:#4d1022;--ink:#fff1e0;--muted:#e6bdb3;--rose:#ff4d6d;--rose-deep:#d0123c;--gold:#ffc98a;
+  --paper:#fff6ea;--paper-ink:#4a1c1c;--display:"Baloo 2",system-ui,sans-serif;--script:"Pacifico",cursive;
+  background:radial-gradient(rgba(255,77,109,.13) 2px,transparent 2.6px) 0 0/26px 26px,radial-gradient(120% 80% at 50% 0%,var(--night-2),var(--night) 65%);
+  background-color:var(--night);background-attachment:fixed}
+.kieu-cherry .mo-dau-chu h1,.kieu-cherry h2{font-weight:800}
+.kieu-cherry .mo-dau-chu h1 em{font-weight:400;font-size:1.1em;margin-top:8px;text-shadow:3px 3px 0 rgba(255,241,224,.9)}
+.kieu-cherry #ket h2 em{font-weight:400;font-size:.65em;margin-bottom:6px}
+.kieu-cherry .thu{border:10px solid transparent;border-radius:16px;
+  background:linear-gradient(var(--paper),var(--paper)) padding-box,repeating-conic-gradient(#ff4d6d 0 25%,#ffd5dc 0 50%) 0 0/16px 16px border-box}
+.kieu-cherry .thu::before{inset:6px;border-color:rgba(208,18,60,.3)}
+.kieu-cherry .thu .chao{font-weight:400;font-size:28px;color:var(--rose-deep)}
+.kieu-cherry .thu .ky b{font-weight:400;font-size:24px}
+.kieu-cherry .pb-sau{background:linear-gradient(#a3162f,#c9284a)}
+.kieu-cherry .pb-truoc{background:linear-gradient(160deg,#ff6f88,#e63a5c)}
+.kieu-cherry .pb-truoc::before{background:linear-gradient(0deg,#f45574,#ef4a6b)}
+.kieu-cherry .pb-nap{background:linear-gradient(180deg,#ff8197,#ff5c79)}
+.kieu-cherry .pb-dau{background:radial-gradient(circle at 35% 30%,#fffaf2,#ffe6cc 55%,#e9b98a);color:#d0123c;text-shadow:none}
+.kieu-cherry .pb-dau::before{border-color:rgba(208,18,60,.35)}
+.kieu-cherry .pb-gui{color:#ffe1e7}
+.kieu-cherry .pb-gui b{font-weight:400;color:#fff6ea;text-shadow:2px 2px 0 rgba(120,0,30,.3)}
+.kieu-cherry .sticker{background:var(--rose);color:var(--paper);border:3px solid var(--paper);font:800 14px/1.1 var(--display)}
+.kieu-cherry .sticker:nth-of-type(even){background:var(--paper);color:var(--rose-deep);border-color:var(--rose)}
+.kieu-cherry .bang{font-size:22px;letter-spacing:.01em}
+.kieu-cherry .bang-1{background:var(--rose);color:var(--paper)}
+.kieu-cherry .bang-2{background:repeating-conic-gradient(#fff6ea 0 25%,#ffd5dc 0 50%) 0 0/18px 18px;color:var(--rose-deep)}
+.kieu-cherry .canh-hoa i::before{border-radius:0;opacity:.85;background:linear-gradient(135deg,#ff8fa3,#ff4d6d);
+  clip-path:polygon(50% 100%,8% 55%,0 30%,10% 8%,30% 0,50% 14%,70% 0,90% 8%,100% 30%,92% 55%)}
+.kieu-cherry .the-vibe{--tv-nen:#fff6ea;--tv-chu:#4a1c1c;--tv-ray:rgba(208,18,60,.12);--tv-vien:repeating-conic-gradient(#ff4d6d 0 25%,#ffd5dc 0 50%) 0 0/16px 16px}
+.kieu-cherry .tv-ten{font-weight:800;color:var(--rose-deep)}
+.kieu-cherry .tv-danh-hieu{color:#c9733a}
+.kieu-cherry .nut{background:var(--rose);border:3px solid var(--paper);box-shadow:0 10px 30px -8px rgba(255,77,109,.7)}
+.kieu-cherry .chibi{box-shadow:0 0 0 4px var(--paper),0 0 0 7px var(--rose),0 0 34px rgba(255,77,109,.5)}
+
+@media (prefers-reduced-motion: reduce){
+  .chay,.the-vibe,.sticker,.cs.vo-cuc u{animation:none!important}
+  .bang-chu .chay{transform:translateX(-10%)}
 }
