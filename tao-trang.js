@@ -8,8 +8,8 @@ const THIEP = require("./data.js");
 const phienBan = Date.now().toString(36); // chống trình duyệt trong Telegram giữ bản cũ
 // Font riêng cho từng giao diện (đều có dấu tiếng Việt)
 const FONT = {
-  holo: "&family=Unbounded:wght@500;700;800",
-  neon: "&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Mono:wght@400;700",
+  holo: "",
+  neon: "&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@700;800",
   denim: "&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500;1,9..144,700&family=Lexend:wght@400;500;600",
   cherry: "&family=Baloo+2:wght@500;700;800&family=Pacifico"
 };
@@ -40,7 +40,7 @@ function trang(khoa, nguoi) {
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💐</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600${FONT[nguoi.phongCach] || ""}&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Quicksand:wght@500;600;700&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600${FONT[nguoi.phongCach] || ""}&display=swap">
 <link rel="stylesheet" href="style.css?v=${phienBan}">
 </head>
 <body class="khoa${nguoi.phongCach ? " kieu-" + nguoi.phongCach : ""}">
@@ -100,6 +100,20 @@ function trang(khoa, nguoi) {
     </div>
   </section>
 
+  <section id="wrapped" hidden>
+    <div class="khung">
+      <div class="tieu-de">
+        <div class="nho">20/10 Wrapped</div>
+        <h2>Một năm của <span id="wr-ten"></span></h2>
+        <p>Chạm bên phải để xem tiếp, bên trái để quay lại</p>
+      </div>
+      <div class="wr" id="wr" role="button" tabindex="0" aria-label="Xem slide tiếp theo">
+        <div class="wr-thanh" id="wr-thanh"></div>
+        <div class="wr-slide" id="wr-slide"></div>
+      </div>
+    </div>
+  </section>
+
   <section id="vuon">
     <div class="khung">
       <div class="tieu-de">
@@ -140,11 +154,30 @@ function trang(khoa, nguoi) {
   </section>
 </main>
 
+<div class="gacha" id="gacha" hidden>
+  <div class="g-tia"></div>
+  <div class="g-vong"></div>
+  <div class="g-cau" id="g-cau"></div>
+  <div class="g-the" id="g-the">
+    <div class="g-mat g-sau"><span>?</span></div>
+    <div class="g-mat g-truoc">
+      <div class="g-sao">★★★★★</div>
+      <div class="g-hang">UR</div>
+      <div class="g-anh"><img id="g-anh" alt=""></div>
+      <div class="g-ten" id="g-ten"></div>
+      <div class="g-ti-le">Nhân vật cực hiếm · tỉ lệ 0,01%</div>
+    </div>
+  </div>
+  <div class="g-chu" id="g-chu"></div>
+  <button class="nut g-nhan" id="g-nhan" type="button" hidden>Nhận nhân vật 💖</button>
+  <div class="g-loe" id="g-loe"></div>
+</div>
+
 <div class="chon" id="chon" hidden>
   <div class="khung">
     <div class="nho">20 · 10 · ${new Date().getFullYear()}</div>
     <h1>Thiệp này của ai nào?</h1>
-    <p>Chạm vào mặt mình để mở thiệp riêng nhé</p>
+    <p>Chạm vào lá bài có tên mình để mở thiệp nhé</p>
     <div class="ds-chon" id="ds-chon"></div>
     <button class="nut vien" id="xem-chung" type="button">Xem thiệp chung của cả team</button>
   </div>

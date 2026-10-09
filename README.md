@@ -2,7 +2,7 @@
 
 Thiệp 20/10 cho chị em trong công ty: pháo hoa tụ thành tên, phong thư dấu sáp mở ra lá thư riêng (chữ hiện dần), vườn hoa lời chúc của cả team, hộp quà kèm thẻ cào, màn pháo hoa trái tim kết thúc.
 
-**Một link chung cho cả 4 người** (vào rồi chạm vào ảnh chibi của mình):
+**Một link chung cho cả 4 người** (vào rồi chạm vào lá bài có tên mình):
 - https://hoanggiacuong.github.io/ChucMung2010/
 
 **Hoặc link riêng từng người** (mỗi link có ô xem trước riêng khi dán vào Telegram):
@@ -18,7 +18,9 @@ Thiệp 20/10 cho chị em trong công ty: pháo hoa tụ thành tên, phong th�
 
 Ảnh chibi: `anh/chibi-*.jpg` (ảnh vuông 400×400). Đổi ảnh thì thay file và sửa trường `chibi` trong `data.js`.
 
-Mỗi người có giao diện riêng (`phongCach` trong `data.js`): `holo` (Y2K ánh kim), `neon` (đen + neon), `denim` (pastel hoa cúc), `cherry` (cherry cola). Sticker kéo thả nằm ở `nhan`, thẻ nhân vật nằm ở `vibe`.
+Mỗi người có giao diện riêng (`phongCach` trong `data.js`): `holo` (Y2K ánh kim), `neon` (đen + neon), `denim` (pastel hoa cúc), `cherry` (cherry cola). Sticker kéo thả nằm ở `nhan`, thẻ nhân vật nằm ở `vibe`, các slide "20/10 Wrapped" nằm ở `wrapped`.
+
+Mở đầu: người có ảnh chibi sẽ quay một lượt gacha, lá bài lật ra mới thấy chibi. Ở link chung, màn chọn người chỉ hiện lá bài úp kèm tên để giữ bất ngờ.
 
 Ảnh: bỏ vào thư mục `anh/` rồi ghi đường dẫn vào `data.js` (ví dụ `anh: "anh/ngan.jpg"`). Nên thu nhỏ ảnh còn chiều rộng khoảng 1000px.
 

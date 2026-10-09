@@ -11,6 +11,7 @@
 //   phongCach: giao diện riêng: "holo" (Y2K ánh kim), "neon" (đen + neon), "denim" (pastel hoa cúc), "cherry" (cherry cola)
 //   nhan:   4 sticker kéo thả được (2 cái ở màn mở đầu, 2 cái quanh lá thư), chữ cũng chạy trên băng chữ
 //   vibe:   thẻ nhân vật: danhHieu, emoji, hiem (độ hiếm), chiSo: [tên, số 0-100 hoặc "∞"]
+//   wrapped: các slide "20/10 Wrapped": [con số lớn, câu đi kèm, emoji]. Số đứng đầu sẽ chạy từ 0 lên
 // Dùng được cả trên trình duyệt (window.THIEP) lẫn trong node (module.exports).
 var THIEP = {
   // Địa chỉ trang sau khi lên GitHub Pages, dùng cho ảnh xem trước trên Telegram
@@ -48,6 +49,7 @@ var THIEP = {
       phongCach: "holo",
       nhan: ["slay ✨", "it girl 💅", "main character", "10/10 ⭐"],
       vibe: { danhHieu: "Nữ hoàng bình tĩnh", emoji: "🦋", hiem: "SSR", chiSo: [["Độ xinh", 100], ["Bình tĩnh khi deadline dí", 99], ["Nhắc team nộp việc", "∞"]] },
+      wrapped: [["37", "lần giữ bình tĩnh khi deadline dí sát nút", "🧘‍♀️"], ["1.204", "tin nhắn \"nộp chưa em?\" đã gửi cho team", "📩"], ["100%", "độ yên tâm của cả team khi có chị", "🛡️"], ["Top 1%", "đồng nghiệp được yêu quý nhất năm", "🏆"]],
       qua: "Một buổi spa thư giãn trọn gói 💆‍♀️"
     },
     thao: {
@@ -64,6 +66,7 @@ var THIEP = {
       phongCach: "neon",
       nhan: ["VIBE CHECK ✅", "✌️ peace", "no cap", "đỉnh nóc kịch trần"],
       vibe: { danhHieu: "Cứu tinh của team", emoji: "⚡", hiem: "UR", chiSo: [["Độ cool", 100], ["Sẵn lòng giúp đỡ", 100], ["Kiên nhẫn với câu hỏi ngớ ngẩn", "∞"]] },
+      wrapped: [["999+", "câu hỏi ngớ ngẩn chị đã trả lời mà không cáu", "🙋"], ["24/7", "chế độ sẵn sàng giúp đỡ mọi người", "⚡"], ["0", "lần từ chối khi team cần", "🙅‍♀️"], ["Top 1%", "người cool nhất văn phòng", "😎"]],
       qua: "Một bó hoa tươi giao tận bàn mỗi thứ Hai trong tháng 💐"
     },
     quyen: {
@@ -80,6 +83,7 @@ var THIEP = {
       phongCach: "denim",
       nhan: ["soft era ☁️", "daisy girl 🌼", "chill thôi", "certified cutie"],
       vibe: { danhHieu: "Trạm phát năng lượng", emoji: "🌼", hiem: "SSR", chiSo: [["Năng lượng", 100], ["Độ dễ thương", 100], ["Số nơi muốn đi du lịch", "∞"]] },
+      wrapped: [["8.760", "giờ phát năng lượng tích cực cho văn phòng", "🔋"], ["∞", "nơi muốn đi du lịch trong năm tới", "✈️"], ["3 phút", "là đủ để cả phòng bật cười", "😂"], ["Top 1%", "nguồn vui của cả team", "🌼"]],
       qua: "Voucher trà sữa cả tháng 🧋"
     },
     quynhanh: {
@@ -96,6 +100,7 @@ var THIEP = {
       phongCach: "cherry",
       nhan: ["em út vibes 🍒", "cười xỉu 😆", "trà sữa time 🧋", "cưng xỉu"],
       vibe: { danhHieu: "Em út quốc dân", emoji: "🍒", hiem: "UR", chiSo: [["Độ nhiệt tình", 100], ["Nụ cười tỏa nắng", 100], ["Được cả team cưng", "∞"]] },
+      wrapped: [["365", "ngày nhiệt tình không nghỉ", "🔥"], ["52", "ly trà sữa (ước tính rất khiêm tốn)", "🧋"], ["1000%", "độ cưng của cả team dành cho em", "🥰"], ["Top 1%", "em út xịn nhất vũ trụ", "🍒"]],
       qua: "Được về sớm một buổi chiều tự chọn 🏃‍♀️"
     }
   },

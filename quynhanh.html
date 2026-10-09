@@ -17,8 +17,8 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💐</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Baloo+2:wght@500;700;800&family=Pacifico&display=swap">
-<link rel="stylesheet" href="style.css?v=mv0udrmd">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Quicksand:wght@500;600;700&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Baloo+2:wght@500;700;800&family=Pacifico&display=swap">
+<link rel="stylesheet" href="style.css?v=mv0v9q6c">
 </head>
 <body class="khoa kieu-cherry">
 <div class="sao" id="sao"></div>
@@ -77,6 +77,20 @@
     </div>
   </section>
 
+  <section id="wrapped" hidden>
+    <div class="khung">
+      <div class="tieu-de">
+        <div class="nho">20/10 Wrapped</div>
+        <h2>Một năm của <span id="wr-ten"></span></h2>
+        <p>Chạm bên phải để xem tiếp, bên trái để quay lại</p>
+      </div>
+      <div class="wr" id="wr" role="button" tabindex="0" aria-label="Xem slide tiếp theo">
+        <div class="wr-thanh" id="wr-thanh"></div>
+        <div class="wr-slide" id="wr-slide"></div>
+      </div>
+    </div>
+  </section>
+
   <section id="vuon">
     <div class="khung">
       <div class="tieu-de">
@@ -117,11 +131,30 @@
   </section>
 </main>
 
+<div class="gacha" id="gacha" hidden>
+  <div class="g-tia"></div>
+  <div class="g-vong"></div>
+  <div class="g-cau" id="g-cau"></div>
+  <div class="g-the" id="g-the">
+    <div class="g-mat g-sau"><span>?</span></div>
+    <div class="g-mat g-truoc">
+      <div class="g-sao">★★★★★</div>
+      <div class="g-hang">UR</div>
+      <div class="g-anh"><img id="g-anh" alt=""></div>
+      <div class="g-ten" id="g-ten"></div>
+      <div class="g-ti-le">Nhân vật cực hiếm · tỉ lệ 0,01%</div>
+    </div>
+  </div>
+  <div class="g-chu" id="g-chu"></div>
+  <button class="nut g-nhan" id="g-nhan" type="button" hidden>Nhận nhân vật 💖</button>
+  <div class="g-loe" id="g-loe"></div>
+</div>
+
 <div class="chon" id="chon" hidden>
   <div class="khung">
     <div class="nho">20 · 10 · 2026</div>
     <h1>Thiệp này của ai nào?</h1>
-    <p>Chạm vào mặt mình để mở thiệp riêng nhé</p>
+    <p>Chạm vào lá bài có tên mình để mở thiệp nhé</p>
     <div class="ds-chon" id="ds-chon"></div>
     <button class="nut vien" id="xem-chung" type="button">Xem thiệp chung của cả team</button>
   </div>
@@ -135,8 +168,8 @@
   </div>
 </div>
 
-<script src="data.js?v=mv0udrmd"></script>
+<script src="data.js?v=mv0v9q6c"></script>
 <script>window.NGUOI_NHAN = "quynhanh";</script>
-<script src="app.js?v=mv0udrmd"></script>
+<script src="app.js?v=mv0v9q6c"></script>
 </body>
 </html>
