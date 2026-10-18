@@ -8,10 +8,10 @@
 //   chibi:  ảnh mặt/chibi để chọn ở link chung (index.html), ví dụ "anh/chibi-ngan.png"
 //           (để trống thì hiện chữ cái đầu tên)
 //   qua:    phần quà trong hộp (để trống "" thì ẩn phần bốc quà)
-//   phongCach: giao diện riêng: "holo" (Y2K ánh kim), "neon" (đen + neon), "denim" (pastel hoa cúc), "cherry" (cherry cola)
+//   phongCach: giao diện riêng: "holo" (Y2K ánh kim), "neon" (đen + neon), "denim" (pastel hoa cúc), "cherry" (cherry cola), "kitty" (hồng dễ thương kiểu Hello Kitty)
 //   nhan:   4 sticker kéo thả được (2 cái ở màn mở đầu, 2 cái quanh lá thư), chữ cũng chạy trên băng chữ
 //   vibe:   thẻ nhân vật: danhHieu, emoji, hiem (độ hiếm), chiSo: [tên, số 0-100 hoặc "∞"]
-//   wrapped: các slide "20/10 Wrapped": [con số lớn, câu đi kèm, emoji]. Số đứng đầu sẽ chạy từ 0 lên
+//   wrapped: các dấu ấn "một năm qua" của riêng người này: [con số lớn, câu đi kèm, emoji]. Mỗi mục thành một bông hoa riêng trong vườn hoa
 // Dùng được cả trên trình duyệt (window.THIEP) lẫn trong node (module.exports).
 var THIEP = {
   // Địa chỉ trang sau khi lên GitHub Pages, dùng cho ảnh xem trước trên Telegram
@@ -41,33 +41,33 @@ var THIEP = {
       chao: "Chị Ngân ơi,",
       ban: "chị",
       loiChuc: [
-        "Cảm ơn chị vì lúc nào cũng là người bình tĩnh nhất team, kể cả những hôm deadline dí sát nút.",
-        "20/10 này chúc chị thật nhiều sức khoẻ, luôn xinh đẹp, cười nhiều hơn và bớt phải nhắc tụi em nộp việc đúng hạn 😄"
+        "Cảm ơn chị vì luôn là điểm tựa vững vàng của cả team, nghiêm túc khi cần mà vẫn giữ được sự trẻ con đáng yêu mỗi lúc trò chuyện.",
+        "20/10 này chúc chị luôn xinh đẹp, khoẻ mạnh, có thật nhiều dịp đi quẩy concert cùng chị Thảo, và nét vẽ cứ thế mà thăng hoa mãi nhé 🐻🎨"
       ],
       anh: "",
       chibi: "anh/chibi-ngan.jpg",
       phongCach: "holo",
-      nhan: ["slay ✨", "it girl 💅", "main character", "10/10 ⭐"],
-      vibe: { danhHieu: "Nữ hoàng bình tĩnh", emoji: "🦋", hiem: "SSR", chiSo: [["Độ xinh", 100], ["Bình tĩnh khi deadline dí", 99], ["Nhắc team nộp việc", "∞"]] },
-      wrapped: [["37", "lần giữ bình tĩnh khi deadline dí sát nút", "🧘‍♀️"], ["1.204", "tin nhắn \"nộp chưa em?\" đã gửi cho team", "📩"], ["100%", "độ yên tâm của cả team khi có chị", "🛡️"], ["Top 1%", "đồng nghiệp được yêu quý nhất năm", "🏆"]],
-      qua: "Một buổi spa thư giãn trọn gói 💆‍♀️"
+      nhan: ["gấu con Hải Phòng 🐻", "cạ cứng đi concert của chị Thảo 🎤", "lúc nghiêm lúc nghịch", "tay vẽ cứng ✍️"],
+      vibe: { danhHieu: "Đại tỷ gấu con Hải Phòng", emoji: "🐻", hiem: "SSR", chiSo: [["Chất đầu gấu", 100], ["Thích đi quẩy concert cùng chị Thảo", 80], ["Nét vẽ", 98]] },
+      wrapped: [["Nhiều lần", "rủ chị Thảo đi quẩy concert cùng nhau", "🎤"], ["200+", "bức vẽ ra đời dưới deadline dí sát nút", "🎨"], ["Top 1", "chị cả đầu gấu nhưng tim mềm nhất xóm", "🐻"], ["50/50", "tỉ lệ nghiêm túc và trẻ con mỗi ngày", "🎭"]],
+      qua: "Hoa tươi và một bữa tiệc đang đợi chị em 💐🎉"
     },
     thao: {
-      goi: "chị Thảo",
+      goi: "Thảo",
       tenNgan: "Thảo",
-      chao: "Chị Thảo ơi,",
-      ban: "chị",
+      chao: "Thảo ơi,",
+      ban: "Thảo",
       loiChuc: [
-        "Cảm ơn chị đã luôn sẵn lòng giúp mọi người, kể cả những câu hỏi ngớ ngẩn nhất của tụi em.",
-        "Chúc chị 20/10 ngập tràn hoa và quà, luôn trẻ trung, xinh đẹp, gia đình êm ấm và mọi điều mong ước đều thành."
+        "Cảm ơn chị vì chưa khi nào ngừng lo cho mọi người, từ mua đồ, chuẩn bị, đến gọt từng miếng hoa quả cho cả phòng.",
+        "20/10 này chúc chị thật nhiều sức khoẻ để bớt ốm vặt, lúc nào cũng hồng hào dễ thương như màu chị thích, và thắng thêm vài trận khẩu chiến với sếp. Mong giấc mơ được ở nhà ngủ nướng sớm thành hiện thực nhé 🩷😴"
       ],
       anh: "",
       chibi: "anh/chibi-thao.jpg",
-      phongCach: "neon",
-      nhan: ["VIBE CHECK ✅", "✌️ peace", "no cap", "đỉnh nóc kịch trần"],
-      vibe: { danhHieu: "Cứu tinh của team", emoji: "⚡", hiem: "UR", chiSo: [["Độ cool", 100], ["Sẵn lòng giúp đỡ", 100], ["Kiên nhẫn với câu hỏi ngớ ngẩn", "∞"]] },
-      wrapped: [["999+", "câu hỏi ngớ ngẩn chị đã trả lời mà không cáu", "🙋"], ["24/7", "chế độ sẵn sàng giúp đỡ mọi người", "⚡"], ["0", "lần từ chối khi team cần", "🙅‍♀️"], ["Top 1%", "người cool nhất văn phòng", "😎"]],
-      qua: "Một bó hoa tươi giao tận bàn mỗi thứ Hai trong tháng 💐"
+      phongCach: "kitty",
+      nhan: ["hồng là chân ái 🩷", "giọng Nghệ An auto cute", "tổng quản văn phòng", "mơ được ngủ nướng 😴"],
+      vibe: { danhHieu: "Tổng quản dễ thương của văn phòng", emoji: "🍑", hiem: "UR", chiSo: [["Độ chăm sóc cả nhà", 100], ["Tốc độ gọt hoa quả", "∞"], ["Độ lầy khi cãi tay đôi với sếp", 95]] },
+      wrapped: [["365", "ngày lo cho cả văn phòng từ A-Z", "🧺"], ["200+", "lần đèo chị Ngân đi làm dù người đang mệt", "🛵"], ["∞", "lần 'cãi tay đôi' với sếp mà vẫn thắng lý", "😤"], ["1", "giấc mơ duy nhất: được ở nhà ngủ nướng", "😴"]],
+      qua: "Hoa tươi và một bữa tiệc đang đợi chị em 💐🎉"
     },
     quyen: {
       goi: "Quyên",
@@ -75,16 +75,16 @@ var THIEP = {
       chao: "Quyên ơi,",
       ban: "Quyên",
       loiChuc: [
-        "Văn phòng mà thiếu Quyên chắc sẽ yên tĩnh đến mức buồn ngủ. Cảm ơn Quyên đã mang năng lượng tới mỗi ngày.",
-        "Chúc Quyên 20/10 thật vui, công việc thuận lợi, và năm nay đi du lịch được thật nhiều nơi mình thích."
+        "Cảm ơn Quyên vì luôn âm thầm làm tốt mọi việc, thông minh và chỉn chu trong từng chi tiết, về nhà lại ngồi ngắm mấy bể cá cảnh thuỷ sinh tự tay nuôi là vui cả ngày.",
+        "20/10 này chúc Quyên luôn cao ráo xinh đẹp, công việc vẫn thuận lợi như vốn có, và được người yêu chiều hết mức. Mong mấy bể cá cảnh của Quyên lúc nào cũng xanh tốt và đầy ắp niềm vui nhé!"
       ],
       anh: "",
       chibi: "anh/chibi-quyen.jpg",
-      phongCach: "denim",
-      nhan: ["soft era ☁️", "daisy girl 🌼", "chill thôi", "certified cutie"],
-      vibe: { danhHieu: "Trạm phát năng lượng", emoji: "🌼", hiem: "SSR", chiSo: [["Năng lượng", 100], ["Độ dễ thương", 100], ["Số nơi muốn đi du lịch", "∞"]] },
-      wrapped: [["8.760", "giờ phát năng lượng tích cực cho văn phòng", "🔋"], ["∞", "nơi muốn đi du lịch trong năm tới", "✈️"], ["3 phút", "là đủ để cả phòng bật cười", "😂"], ["Top 1%", "nguồn vui của cả team", "🌼"]],
-      qua: "Voucher trà sữa cả tháng 🧋"
+      phongCach: "neon",
+      nhan: ["mặt lạnh tim ấm 🖤", "cao mà dây thế đấy", "dân chơi thuỷ sinh có số 🐠", "đã có người yêu rồi nha"],
+      vibe: { danhHieu: "Cao thủ thuỷ sinh, mặt lạnh tim ấm", emoji: "🐠", hiem: "SSR", chiSo: [["Độ lạnh lúc nghiêm túc", 100], ["Độ thông minh", 100], ["Mê cá cảnh & cây thuỷ sinh", "∞"]] },
+      wrapped: [["10", "câu nói trung bình một ngày (đã là nhiều)", "🤐"], ["∞", "niềm vui mỗi khi về nhà ngắm bể cá cảnh tự nuôi", "🐠"], ["1", "nụ cười khiến cả phòng auto tan chảy", "✨"], ["1", "người yêu kém tuổi đang chờ tan ca đón về", "💌"]],
+      qua: "Hoa tươi và một bữa tiệc đang đợi chị em 💐🎉"
     },
     quynhanh: {
       goi: "em út Quỳnh Anh",
@@ -92,27 +92,23 @@ var THIEP = {
       chao: "Quỳnh Anh ơi,",
       ban: "em",
       loiChuc: [
-        "Em út của team mà làm việc chẳng thua ai. Cảm ơn em vì lúc nào cũng nhiệt tình và vui vẻ.",
-        "Chúc em 20/10 thật nhiều niềm vui, học được thật nhiều, luôn xinh xắn và được cả team cưng như giờ nhé!"
+        "Cảm ơn em vì luôn chăm chỉ với công việc của mình, có việc gì cần là sẵn sàng tham gia ngay.",
+        "20/10 này chúc em luôn khoẻ mạnh, vui vẻ trong chính thế giới của mình, công việc thuận lợi và được mọi người thương nhiều hơn mỗi ngày nhé 🎧🌙"
       ],
       anh: "",
       chibi: "anh/chibi-quynhanh.jpg",
-      phongCach: "cherry",
-      nhan: ["em út vibes 🍒", "cười xỉu 😆", "trà sữa time 🧋", "cưng xỉu"],
-      vibe: { danhHieu: "Em út quốc dân", emoji: "🍒", hiem: "UR", chiSo: [["Độ nhiệt tình", 100], ["Nụ cười tỏa nắng", 100], ["Được cả team cưng", "∞"]] },
-      wrapped: [["365", "ngày nhiệt tình không nghỉ", "🔥"], ["52", "ly trà sữa (ước tính rất khiêm tốn)", "🧋"], ["1000%", "độ cưng của cả team dành cho em", "🥰"], ["Top 1%", "em út xịn nhất vũ trụ", "🍒"]],
-      qua: "Được về sớm một buổi chiều tự chọn 🏃‍♀️"
+      phongCach: "denim",
+      nhan: ["góc riêng là nhà 🎧", "ít nói nhất hội", "cày việc không than vãn", "lặng lẽ mà chất"],
+      vibe: { danhHieu: "Bí ẩn nhất team, chăm nhất hội", emoji: "🎧", hiem: "UR", chiSo: [["Độ tập trung trong thế giới riêng", 100], ["Mức độ ít nói", 100], ["Chăm chỉ không nghỉ", "∞"]] },
+      wrapped: [["0", "lần than vãn dù việc nhiều cỡ nào", "💪"], ["1", "thế giới riêng không ai chen vào được", "🎧"], ["100%", "độ nghiêm túc mỗi khi ngồi vào bàn làm việc", "📐"], ["Top 1", "em út trầm tính nhưng nội lực nhất team", "🌙"]],
+      qua: "Hoa tươi và một bữa tiệc đang đợi chị em 💐🎉"
     }
   },
 
-  // Vườn hoa: mỗi anh em một bông, chạm vào để đọc
-  loiChucTeam: [
-    { tu: "Sếp Bộ", loi: "Cảm ơn chị em đã luôn đồng hành và giữ lửa cho công ty. Chúc mọi người 20/10 thật hạnh phúc, khoẻ mạnh và thành công." },
-    { tu: "Anh Nghĩa", loi: "Chúc các chị em luôn xinh đẹp, vui vẻ, công việc suôn sẻ và ngày nào cũng được cưng như hôm nay." },
-    { tu: "Cường", loi: "Chúc chị em luôn vui, khoẻ và xinh đẹp. Văn phòng có mọi người mới thành nhà!" },
-    { tu: "Sơn", loi: "Chúc chị em 20/10 nhận thật nhiều hoa, nhiều quà, cười thật nhiều và bớt deadline đi một chút." },
-    { tu: "Nghiệp", loi: "Chúc chị em luôn rạng rỡ, mọi điều mong ước đều thành, và mãi là những bông hoa đẹp nhất của team." }
-  ]
+  // Vườn hoa: mỗi anh em một bông, chạm vào để đọc.
+  // Để trống ở đây — lời chúc thật được đồng bộ từ Google Form vào loi-chuc-gop.js
+  // (chạy: node dong-bo-loi-chuc.js "<link-CSV>"), riêng cho từng người.
+  loiChucTeam: []
 };
 
 if (typeof module !== "undefined") module.exports = THIEP;

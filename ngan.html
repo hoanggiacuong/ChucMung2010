@@ -18,11 +18,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Quicksand:wght@500;600;700&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap">
-<link rel="stylesheet" href="style.css?v=mv0v9q6c">
+<link rel="stylesheet" href="style.css?v=mvdooxmu">
 </head>
 <body class="khoa kieu-holo">
 <div class="sao" id="sao"></div>
+<div class="man-tia" id="man-tia" aria-hidden="true"></div>
 <canvas id="troi" aria-hidden="true"></canvas>
+<div class="man-chop" id="man-chop" aria-hidden="true"></div>
 <div class="canh-hoa" id="canh-hoa" aria-hidden="true"></div>
 <button class="nut-nhac" id="nut-nhac" type="button" aria-label="Bật hoặc tắt nhạc" hidden>♪</button>
 
@@ -80,26 +82,14 @@
   <section id="wrapped" hidden>
     <div class="khung">
       <div class="tieu-de">
-        <div class="nho">20/10 Wrapped</div>
-        <h2>Một năm của <span id="wr-ten"></span></h2>
+        <div class="nho">Bảng tin 20/10</div>
+        <h2>Lời chúc dành cho <span id="wr-ten"></span></h2>
         <p>Chạm bên phải để xem tiếp, bên trái để quay lại</p>
       </div>
       <div class="wr" id="wr" role="button" tabindex="0" aria-label="Xem slide tiếp theo">
         <div class="wr-thanh" id="wr-thanh"></div>
         <div class="wr-slide" id="wr-slide"></div>
       </div>
-    </div>
-  </section>
-
-  <section id="vuon">
-    <div class="khung">
-      <div class="tieu-de">
-        <div class="nho">Vườn hoa của team</div>
-        <h2>Mỗi bông hoa một lời chúc</h2>
-        <p>Chạm vào từng bông để đọc nhé</p>
-      </div>
-      <div class="vuon" id="vuon-hoa"></div>
-      <div class="dem" id="dem"></div>
     </div>
   </section>
 
@@ -156,20 +146,12 @@
     <h1>Thiệp này của ai nào?</h1>
     <p>Chạm vào lá bài có tên mình để mở thiệp nhé</p>
     <div class="ds-chon" id="ds-chon"></div>
-    <button class="nut vien" id="xem-chung" type="button">Xem thiệp chung của cả team</button>
   </div>
 </div>
 
-<div class="lop-phu" id="lop-phu" hidden>
-  <div class="the" role="dialog" aria-modal="true" aria-labelledby="the-tu">
-    <p class="tu" id="the-tu"></p>
-    <p id="the-loi"></p>
-    <button class="nut" id="the-dong" type="button">Cảm ơn ❤</button>
-  </div>
-</div>
-
-<script src="data.js?v=mv0v9q6c"></script>
+<script src="data.js?v=mvdooxmu"></script>
 <script>window.NGUOI_NHAN = "ngan";</script>
-<script src="app.js?v=mv0v9q6c"></script>
+<script src="loi-chuc-gop.js?v=mvdooxmu"></script>
+<script src="app.js?v=mvdooxmu"></script>
 </body>
 </html>

@@ -11,7 +11,8 @@ const FONT = {
   holo: "",
   neon: "&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@700;800",
   denim: "&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500;1,9..144,700&family=Lexend:wght@400;500;600",
-  cherry: "&family=Baloo+2:wght@500;700;800&family=Pacifico"
+  cherry: "&family=Baloo+2:wght@500;700;800&family=Pacifico",
+  kitty: "&family=Fredoka:wght@500;600;700&family=Caveat:wght@600;700"
 };
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
@@ -45,7 +46,9 @@ function trang(khoa, nguoi) {
 </head>
 <body class="khoa${nguoi.phongCach ? " kieu-" + nguoi.phongCach : ""}">
 <div class="sao" id="sao"></div>
+<div class="man-tia" id="man-tia" aria-hidden="true"></div>
 <canvas id="troi" aria-hidden="true"></canvas>
+<div class="man-chop" id="man-chop" aria-hidden="true"></div>
 <div class="canh-hoa" id="canh-hoa" aria-hidden="true"></div>
 <button class="nut-nhac" id="nut-nhac" type="button" aria-label="Bật hoặc tắt nhạc" hidden>♪</button>
 
@@ -103,26 +106,14 @@ function trang(khoa, nguoi) {
   <section id="wrapped" hidden>
     <div class="khung">
       <div class="tieu-de">
-        <div class="nho">20/10 Wrapped</div>
-        <h2>Một năm của <span id="wr-ten"></span></h2>
+        <div class="nho">Bảng tin 20/10</div>
+        <h2>Lời chúc dành cho <span id="wr-ten"></span></h2>
         <p>Chạm bên phải để xem tiếp, bên trái để quay lại</p>
       </div>
       <div class="wr" id="wr" role="button" tabindex="0" aria-label="Xem slide tiếp theo">
         <div class="wr-thanh" id="wr-thanh"></div>
         <div class="wr-slide" id="wr-slide"></div>
       </div>
-    </div>
-  </section>
-
-  <section id="vuon">
-    <div class="khung">
-      <div class="tieu-de">
-        <div class="nho">Vườn hoa của team</div>
-        <h2>Mỗi bông hoa một lời chúc</h2>
-        <p>Chạm vào từng bông để đọc nhé</p>
-      </div>
-      <div class="vuon" id="vuon-hoa"></div>
-      <div class="dem" id="dem"></div>
     </div>
   </section>
 
@@ -179,20 +170,12 @@ function trang(khoa, nguoi) {
     <h1>Thiệp này của ai nào?</h1>
     <p>Chạm vào lá bài có tên mình để mở thiệp nhé</p>
     <div class="ds-chon" id="ds-chon"></div>
-    <button class="nut vien" id="xem-chung" type="button">Xem thiệp chung của cả team</button>
-  </div>
-</div>
-
-<div class="lop-phu" id="lop-phu" hidden>
-  <div class="the" role="dialog" aria-modal="true" aria-labelledby="the-tu">
-    <p class="tu" id="the-tu"></p>
-    <p id="the-loi"></p>
-    <button class="nut" id="the-dong" type="button">Cảm ơn ❤</button>
   </div>
 </div>
 
 <script src="data.js?v=${phienBan}"></script>
 <script>window.NGUOI_NHAN = ${JSON.stringify(khoa)};</script>
+<script src="loi-chuc-gop.js?v=${phienBan}"></script>
 <script src="app.js?v=${phienBan}"></script>
 </body>
 </html>

@@ -25,6 +25,19 @@ body.khoa{overflow:hidden;height:100vh}
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.95));box-shadow:0 0 6px rgba(255,255,255,.6);animation:bang 1.2s ease-out forwards}
 @keyframes bang{0%{opacity:0;transform:rotate(148deg) translateX(0) scaleX(.2)}15%{opacity:1}100%{opacity:0;transform:rotate(148deg) translateX(320px) scaleX(1)}}
 
+/* Hiệu ứng hoành tráng cho màn mở đầu: tia sáng xoay nền, chớp sáng, rung máy khi pháo hoa nổ lớn */
+.man-tia{position:fixed;inset:0;z-index:1;overflow:hidden;opacity:0;pointer-events:none;transition:opacity 1s}
+.man-tia::before{content:"";position:absolute;left:50%;top:38%;width:220vmax;height:220vmax;margin:-110vmax 0 0 -110vmax;
+  background:repeating-conic-gradient(var(--rose) 0 4deg,transparent 4deg 18deg);
+  -webkit-mask:radial-gradient(circle,#000 0,transparent 40%);mask:radial-gradient(circle,#000 0,transparent 40%);
+  animation:xoay-tia 16s linear infinite}
+.man-tia.bat{opacity:.16}
+.man-chop{position:fixed;inset:0;z-index:8;background:radial-gradient(circle at 50% 38%,#fff,var(--gold) 60%,transparent 75%);opacity:0;pointer-events:none}
+.man-chop.chop{animation:chop-sang .5s ease-out}
+@keyframes chop-sang{0%{opacity:var(--do,.55)}100%{opacity:0}}
+.giat-may{animation:giat-man .32s ease-out}
+@keyframes giat-man{0%{transform:scale(1)}30%{transform:scale(1.018)}100%{transform:scale(1)}}
+
 /* Cánh hoa rơi */
 .canh-hoa{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;opacity:0;transition:opacity 3s}
 .canh-hoa.hien{opacity:1}
@@ -145,44 +158,11 @@ section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;al
 .tieu-de h2{font-family:var(--tieu-de);font-weight:700;font-size:clamp(26px,7vw,36px);margin:8px 0 6px;line-height:1.2}
 .tieu-de p{margin:0;color:var(--muted);font-size:15px}
 
-/* Vườn hoa */
-#vuon .khung{max-width:620px}
-.dem{text-align:center;color:var(--gold);font-size:14px;margin-top:6px;min-height:22px}
-.vuon{position:relative;height:min(62vh,460px);margin-top:16px;margin-bottom:48px}
-.vuon::after{content:"";position:absolute;left:-16px;right:-16px;bottom:0;height:60px;
-  background:radial-gradient(60% 100% at 50% 100%,rgba(255,122,162,.18),transparent 70%);pointer-events:none}
-.hoa{position:absolute;bottom:0;width:22%;max-width:110px;transform:translateX(-50%);cursor:pointer;background:none;border:0;padding:0;color:inherit}
-.hoa svg{display:block;width:100%;height:auto;overflow:visible}
-.hoa .than{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s ease-out}
-.hoa .la{transform:scale(0);transition:transform .7s ease-out 1s}
-.hoa .bong{transform:scale(0) rotate(-40deg);transition:transform 1.1s cubic-bezier(.2,1.4,.4,1) 1.2s}
-.vuon.mo .than{stroke-dashoffset:0}
-.vuon.mo .la,.vuon.mo .bong{transform:none}
-.hoa{transform-origin:0 100%;animation:lac 5s ease-in-out infinite;will-change:rotate}
-@keyframes lac{0%,100%{rotate:-2deg}50%{rotate:2.5deg}}
-.hoa .ten{position:absolute;top:calc(100% + 4px);left:50%;transform:translateX(-50%);font-size:12px;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .6s 2s}
-.vuon.mo .hoa .ten{opacity:1}
-.hoa:nth-child(even) .ten{top:calc(100% + 22px)}
-.hoa.da-doc .ten{color:var(--gold)}
-.hoa.nhun svg{animation:nhun .5s cubic-bezier(.3,1.6,.5,1)}
-@keyframes nhun{40%{transform:scale(1.12,.92)}}
-.hoa:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:8px}
-
-/* Lời chúc bật lên */
-.lop-phu{position:fixed;inset:0;z-index:10;background:rgba(8,4,18,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  display:flex;align-items:flex-end;justify-content:center;padding:16px;opacity:0;transition:opacity .3s}
-.lop-phu.mo{opacity:1}
-.the{background:var(--paper);color:var(--paper-ink);border-radius:20px;padding:28px 24px 22px;width:100%;max-width:440px;
-  transform:translateY(40px);transition:transform .35s cubic-bezier(.2,1.2,.4,1);margin-bottom:max(12px,env(safe-area-inset-bottom))}
-.lop-phu.mo .the{transform:none}
-.the .tu{font-family:var(--script);font-size:28px;color:var(--rose-deep);font-weight:700;margin:0 0 8px}
-.the p{margin:0 0 18px;font-size:17px}
+.the{background:var(--paper);color:var(--paper-ink);border-radius:20px;padding:28px 24px 22px;width:100%;max-width:440px}
 .nut{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;border:0;
   font:600 15px var(--body);cursor:pointer;background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:#fff;
   box-shadow:0 10px 30px -8px rgba(224,69,123,.6)}
 .nut:active{transform:scale(.97)}
-.nut.vien{background:none;border:1.5px solid rgba(255,255,255,.3);box-shadow:none;color:var(--ink)}
-.the .nut{width:100%}
 
 /* Hộp quà */
 #qua .khung{text-align:center}
@@ -204,7 +184,6 @@ section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;al
   box-shadow:0 0 60px 40px rgba(255,210,122,.0);transition:box-shadow 1s}
 .hop.mo .anh-sang{box-shadow:0 0 90px 60px rgba(255,210,122,.55)}
 .qua-hien{max-width:380px;margin:20px auto 0}
-.qua-hien .the{transform:none;margin:0}
 .qua-hien .nho{color:#a07a8f}
 .qua-hien .ten-qua{font-family:var(--display);font-size:24px;font-weight:600;margin:8px 0 0;line-height:1.35}
 .qua-hien{animation:bat-len .6s cubic-bezier(.2,1.4,.4,1)}
@@ -233,8 +212,9 @@ section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;al
 
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
-  .sao i,.cham .vong::before,.cham .vong::after,.hoa,.keo-xuong b,.phong-bi,.pb-dau,#ket h2,.chibi-mo,.mot-nguoi{animation:none!important}
+  .sao i,.cham .vong::before,.cham .vong::after,.keo-xuong b,.phong-bi,.pb-dau,#ket h2,.chibi-mo,.mot-nguoi{animation:none!important}
   .mot-nguoi{opacity:1;transform:none}
+  .man-tia,.giat-may{animation:none!important}
 }
 
 /* ================= Sticker kéo thả ================= */
@@ -249,7 +229,8 @@ section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;al
 #thu .phong-bi.xong ~ .sticker{opacity:1;pointer-events:auto;animation:dan .6s cubic-bezier(.2,1.6,.4,1) both}
 
 /* ================= Băng chữ chạy ================= */
-.bang-chu{position:relative;z-index:2;height:150px;margin:-20px 0;overflow:hidden;pointer-events:none}
+.bang-chu{position:fixed;left:0;right:0;bottom:0;z-index:6;height:150px;overflow:hidden;pointer-events:none;opacity:0;transition:opacity 1s}
+.bang-chu.hien{opacity:1}
 .bang{position:absolute;left:-10%;right:-10%;top:50%;padding:11px 0;white-space:nowrap;overflow:hidden;background:var(--rose);color:#fff;
   font:800 19px/1 var(--display);letter-spacing:.03em;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 .bang-1{transform:translateY(-50%) rotate(-4deg);z-index:1}
@@ -436,6 +417,43 @@ body.kieu-cherry{--night:#1c070d;--night-2:#4d1022;--ink:#fff1e0;--muted:#e6bdb3
 .kieu-cherry .nut{background:var(--rose);border:3px solid var(--paper);box-shadow:0 10px 30px -8px rgba(255,77,109,.7)}
 .kieu-cherry .chibi{box-shadow:0 0 0 4px var(--paper),0 0 0 7px var(--rose),0 0 34px rgba(255,77,109,.5)}
 
+/* ================= 5. Hello Kitty Cute (Thảo) ================= */
+body.kieu-kitty{--night:#45102c;--night-2:#8c2155;--ink:#fff5f9;--muted:#f0b8d2;--rose:#ff8fc4;--rose-deep:#ff2f7b;--gold:#ffd93d;
+  --paper:#fffafc;--paper-ink:#7a1f45;--display:"Fredoka",sans-serif;--script:"Caveat",cursive;--tieu-de:"Fredoka",sans-serif;--ngay:"Fredoka",sans-serif;
+  --nen:radial-gradient(circle,rgba(255,255,255,.35) 2px,transparent 2.6px) 0 0/30px 30px,radial-gradient(120% 80% at 50% 0%,var(--night-2),var(--night) 62%);
+  background:var(--night)}
+.kieu-kitty .mo-dau-chu h1{font-weight:600;font-size:clamp(27px,7.6vw,42px);line-height:1.2}
+.kieu-kitty .mo-dau-chu h1 em{font-family:var(--script);font-style:normal;color:#fff;font-size:1.5em;margin-top:8px;text-shadow:3px 3px 0 var(--rose-deep)}
+.kieu-kitty h2,.kieu-kitty .tieu-de h2{font-weight:600}
+.kieu-kitty #ket h2{font-weight:600}
+.kieu-kitty #ket h2 em{font-family:var(--script);font-style:normal;-webkit-text-fill-color:#fff;text-shadow:3px 3px 0 var(--rose-deep);font-size:.7em;margin-bottom:6px}
+.kieu-kitty .thu{background:var(--paper);border-radius:28px;border:4px solid #fff;box-shadow:0 0 0 4px var(--rose),0 30px 70px -20px rgba(255,47,123,.5)}
+.kieu-kitty .thu::before{border:2px dashed rgba(255,47,123,.3);border-radius:20px}
+.kieu-kitty .thu .chao{font-size:36px;color:var(--rose-deep)}
+.kieu-kitty .thu .ky b{font-size:30px;color:var(--rose-deep)}
+.kieu-kitty .pb-sau{background:linear-gradient(#ffb8d6,#ffd3e6)}
+.kieu-kitty .pb-truoc{background:linear-gradient(160deg,#fff0f6,#ffd3e6)}
+.kieu-kitty .pb-truoc::before{background:linear-gradient(0deg,#ffe4f0,#ffd9ea)}
+.kieu-kitty .pb-nap{background:linear-gradient(180deg,#ffc2dd,#fff0f6)}
+.kieu-kitty .pb-dau{background:radial-gradient(circle at 35% 30%,#fff,#ff8fc4 45%,#ff2f7b 85%);color:#fff;text-shadow:none;box-shadow:0 0 0 3px #fff,0 6px 18px rgba(255,47,123,.5)}
+.kieu-kitty .pb-dau::before{border-color:rgba(255,255,255,.6)}
+.kieu-kitty .pb-gui{color:#b2567f}
+.kieu-kitty .pb-gui b{color:var(--rose-deep)}
+.kieu-kitty .sticker{border-radius:999px;background:#fff;color:var(--rose-deep);border-color:var(--rose);font-weight:700}
+.kieu-kitty .sticker:nth-of-type(even){background:var(--rose-deep);color:#fff;border-color:#fff}
+.kieu-kitty .bang{font-family:var(--display);font-weight:600}
+.kieu-kitty .bang-1{background:#fff;color:var(--rose-deep)}
+.kieu-kitty .bang-2{background:var(--rose-deep);color:#fff}
+.kieu-kitty .canh-hoa i::before{border-radius:50%;opacity:.9;background:#fff}
+.kieu-kitty .canh-hoa i:nth-child(odd)::before{background:var(--rose-deep)}
+.kieu-kitty .canh-hoa i:nth-child(3n)::before{background:var(--gold)}
+.kieu-kitty .the-vibe{--tv-nen:#fff0f6;--tv-chu:#7a1f45;--tv-ray:rgba(255,47,123,.15);--tv-vien:linear-gradient(135deg,#ff2f7b,#fff,#ff8fc4)}
+.kieu-kitty .tv-ten{font-family:var(--display);color:var(--rose-deep)}
+.kieu-kitty .tv-danh-hieu{color:#ff2f7b}
+.kieu-kitty .cs u{background:linear-gradient(90deg,#ff8fc4,var(--rose-deep))}
+.kieu-kitty .nut{background:var(--rose-deep);color:#fff;border:3px solid #fff;box-shadow:0 10px 30px -8px rgba(255,47,123,.7)}
+.kieu-kitty .chibi{box-shadow:0 0 0 4px #fff,0 0 0 7px var(--rose-deep),0 0 34px rgba(255,143,196,.6)}
+
 @media (prefers-reduced-motion: reduce){
   .chay,.the-vibe,.sticker,.cs.vo-cuc u{animation:none!important}
   .bang-chu .chay{transform:translateX(-10%)}
@@ -505,9 +523,11 @@ body.dang-gacha #troi,body.dang-gacha .giay-mau{z-index:16}
 .g-anh img{width:100%;height:100%;object-fit:cover;display:block}
 .g-ten{font:700 24px/1.1 var(--tieu-de);color:var(--ink)}
 .g-ti-le{font-size:11.5px;color:var(--muted);letter-spacing:.04em}
-.g-nhan{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);animation:bat-len .6s cubic-bezier(.2,1.4,.4,1)}
+.g-nhan{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);animation:bat-len-giua .6s cubic-bezier(.2,1.4,.4,1)}
+.g-nhan:active{transform:translateX(-50%) scale(.97)}
+@keyframes bat-len-giua{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(.9)}}
 
-/* ================= 20/10 Wrapped ================= */
+/* ================= Bảng tin: lời chúc + "một năm qua" dạng story vuốt xem ================= */
 #wrapped .khung{max-width:400px}
 .wr{position:relative;margin:24px auto 0;width:min(100%,340px);aspect-ratio:9/14;border-radius:24px;overflow:hidden;cursor:pointer;
   user-select:none;-webkit-user-select:none;box-shadow:0 30px 70px -20px rgba(0,0,0,.7)}
@@ -519,11 +539,10 @@ body.dang-gacha #troi,body.dang-gacha .giay-mau{z-index:16}
 .wr.chay .wr-thanh i.dang b{animation:thanh-chay var(--dai) linear forwards}
 .wr-thanh i.dang:last-child b{width:100%;animation:none}
 @keyframes thanh-chay{to{width:100%}}
-.wr-slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:40px 26px 30px;color:#fff;overflow:hidden}
+.wr-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:40px 26px 30px;color:#fff;overflow:hidden;text-align:center}
 .wr-slide::before,.wr-slide::after{content:"";position:absolute;border-radius:50%;filter:blur(2px);opacity:.55}
-.wr-slide::before{width:260px;height:260px;right:-90px;top:-60px;background:var(--gold);animation:troi-blob 7s ease-in-out infinite alternate}
-.wr-slide::after{width:200px;height:200px;left:-70px;bottom:-50px;background:var(--rose);animation:troi-blob 8s ease-in-out infinite alternate-reverse}
-@keyframes troi-blob{to{transform:translate(-30px,40px) scale(1.15)}}
+.wr-slide::before{width:260px;height:260px;right:-90px;top:-60px;background:var(--gold)}
+.wr-slide::after{width:200px;height:200px;left:-70px;bottom:-50px;background:var(--rose)}
 .wr-slide.n0{background:linear-gradient(160deg,var(--rose-deep),var(--night))}
 .wr-slide.n1{background:linear-gradient(160deg,var(--rose),var(--rose-deep))}
 .wr-slide.n2{background:linear-gradient(160deg,var(--night-2),var(--rose-deep))}
@@ -531,12 +550,12 @@ body.dang-gacha #troi,body.dang-gacha .giay-mau{z-index:16}
 .wr-slide.n3{color:#1a0f24}
 .wr-slide>*{position:relative;z-index:1;animation:vao-slide .6s cubic-bezier(.2,1,.3,1) both}
 .wr-emoji{font-size:54px;line-height:1;animation-delay:.05s}
-.wr-lon{font:700 clamp(46px,15vw,72px)/1 var(--tieu-de);letter-spacing:-.02em;animation-delay:.15s;text-shadow:0 4px 24px rgba(0,0,0,.25)}
+.wr-lon{font:700 clamp(32px,9vw,46px)/1.1 var(--tieu-de);letter-spacing:-.02em;animation-delay:.15s;text-shadow:0 4px 24px rgba(0,0,0,.25)}
 .wr-chu{font:600 19px/1.4 var(--body);max-width:15em;animation-delay:.3s}
 @keyframes vao-slide{from{opacity:0;transform:translateY(24px)}}
 
 @media (prefers-reduced-motion: reduce){
-  .la-up,.g-tia,.g-vong,.gacha.roi .g-cau,.wr-slide::before,.wr-slide::after{animation:none!important}
+  .la-up,.g-tia,.g-vong,.gacha.roi .g-cau{animation:none!important}
   .gacha.roi .g-cau{transform:none}
 }
 .g-tia,.g-vong,.g-cau{pointer-events:none}
