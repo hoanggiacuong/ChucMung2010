@@ -658,3 +658,5 @@ body.kieu-kitty{--night:#fff2f7;--night-2:#ffdcea;--ink:#7a1f45;--muted:#b2567f;
 html.khoa-cuon,html.khoa-cuon body{overflow:hidden;overscroll-behavior:none}
 /* Quay lại trang chọn bằng nút Back: hiện ngay đủ 4 lá bài, không chờ hiệu ứng */
 .mot-nguoi.hien-lai{opacity:1;transform:none;animation:none}
+.wr-chu.dai{font-size:17px;max-width:17em}
+.wr-chu.rat-dai{font-size:15.5px;max-width:18em}

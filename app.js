@@ -828,7 +828,7 @@
       wrSo = Math.max(0, Math.min(slide.length - 1, k));
       var s = slide[wrSo];
       wrSlide.className = "wr-slide n" + (wrSo % 4);
-      wrSlide.innerHTML = '<div class="wr-emoji">' + s[0] + '</div><div class="wr-lon"></div><div class="wr-chu">' + esc(s[2]) + "</div>";
+      wrSlide.innerHTML = '<div class="wr-emoji">' + s[0] + '</div><div class="wr-lon"></div><div class="wr-chu' + (s[2].length > 200 ? " rat-dai" : s[2].length > 130 ? " dai" : "") + '">' + esc(s[2]) + "</div>"; // lời chúc dài thì chữ nhỏ lại cho vừa slide
       demLen(wrSlide.querySelector(".wr-lon"), s[1]);
       wrThanh.querySelectorAll("i").forEach(function (t, j) { t.className = j < wrSo ? "xong" : j === wrSo ? "dang" : ""; });
       clearTimeout(wrHen);
