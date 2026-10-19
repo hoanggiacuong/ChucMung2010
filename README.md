@@ -1,6 +1,6 @@
 # Chúc mừng 20/10
 
-Thiệp 20/10 cho chị em trong công ty: mở đầu gieo hạt, tưới cây cho hoa nở ra tên rồi mưa hoa, phong thư dấu sáp mở ra lá thư riêng (chữ hiện dần), vườn hoa lời chúc của cả team, hộp quà kèm thẻ cào, màn pháo hoa trái tim kết thúc.
+Thiệp 20/10 cho chị em trong công ty: mở đầu đom đóm tụ thành "Chúc mừng 20-10" rồi thành tên, phong thư dấu sáp mở ra lá thư riêng (chữ hiện dần), vườn hoa lời chúc của cả team, hộp quà kèm thẻ cào, màn pháo hoa trái tim kết thúc.
 
 **Một link chung cho cả 4 người** (vào rồi chạm vào lá bài có tên mình):
 - https://bbold-gui-chi-em.pages.dev/
@@ -20,7 +20,7 @@ Thiệp 20/10 cho chị em trong công ty: mở đầu gieo hạt, tưới cây 
 
 Mỗi người có giao diện riêng (`phongCach` trong `data.js`): `holo` (Y2K ánh kim), `neon` (đen + neon), `denim` (pastel hoa cúc), `cherry` (cherry cola). Sticker kéo thả nằm ở `nhan`, thẻ nhân vật nằm ở `vibe`, các slide "20/10 Wrapped" nằm ở `wrapped`.
 
-Mở đầu: chạm để gieo hạt, tưới 4 lần thì cây lớn, ra nụ, hoa nở với tên ở nhuỵ rồi cánh hoa bay thành mưa hoa. Thẻ nhân vật: người có ảnh chibi phải quay một lượt gacha ở phần thẻ, bấm "Nhận nhân vật" thì thẻ mới lật ra. Ở link chung, màn chọn người chỉ hiện lá bài úp kèm tên để giữ bất ngờ.
+Mở đầu: chạm một lần để gọi đom đóm, đom đóm bay theo ngón tay, tụ thành "Chúc mừng 20-10", rồi thành tên người nhận, rồi tản ra. Thẻ nhân vật: người có ảnh chibi phải quay một lượt gacha ở phần thẻ, bấm "Nhận nhân vật" thì thẻ mới lật ra. Ở link chung, màn chọn người chỉ hiện lá bài úp kèm tên để giữ bất ngờ.
 
 Ảnh: bỏ vào thư mục `anh/` rồi ghi đường dẫn vào `data.js` (ví dụ `anh: "anh/ngan.jpg"`). Nên thu nhỏ ảnh còn chiều rộng khoảng 1000px.
 
