@@ -3,18 +3,18 @@
 Thiệp 20/10 cho chị em trong công ty: pháo hoa tụ thành tên, phong thư dấu sáp mở ra lá thư riêng (chữ hiện dần), vườn hoa lời chúc của cả team, hộp quà kèm thẻ cào, màn pháo hoa trái tim kết thúc.
 
 **Một link chung cho cả 4 người** (vào rồi chạm vào lá bài có tên mình):
-- https://hoanggiacuong.github.io/ChucMung2010/
+- https://bbold-gui-chi-em.pages.dev/
 
 **Hoặc link riêng từng người** (mỗi link có ô xem trước riêng khi dán vào Telegram):
-- https://hoanggiacuong.github.io/ChucMung2010/ngan.html
-- https://hoanggiacuong.github.io/ChucMung2010/thao.html
-- https://hoanggiacuong.github.io/ChucMung2010/quyen.html
-- https://hoanggiacuong.github.io/ChucMung2010/quynhanh.html
+- https://bbold-gui-chi-em.pages.dev/ngan.html
+- https://bbold-gui-chi-em.pages.dev/thao.html
+- https://bbold-gui-chi-em.pages.dev/quyen.html
+- https://bbold-gui-chi-em.pages.dev/quynhanh.html
 
 ## Sửa nội dung
 1. Sửa `data.js`: lời chúc, quà, lời chúc của anh em trong vườn hoa, ảnh
 2. Chạy `node tao-trang.js` để tạo lại các trang `.html`
-3. Commit và push, khoảng 1–2 phút sau GitHub Pages cập nhật
+3. Commit và push, khoảng 1–2 phút sau Cloudflare Pages cập nhật
 
 Ảnh chibi: `anh/chibi-*.jpg` (ảnh vuông 400×400). Đổi ảnh thì thay file và sửa trường `chibi` trong `data.js`.
 

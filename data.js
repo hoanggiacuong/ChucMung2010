@@ -14,8 +14,8 @@
 //   wrapped: các dấu ấn "một năm qua" của riêng người này: [con số lớn, câu đi kèm, emoji]. Mỗi mục thành một bông hoa riêng trong vườn hoa
 // Dùng được cả trên trình duyệt (window.THIEP) lẫn trong node (module.exports).
 var THIEP = {
-  // Địa chỉ trang sau khi lên GitHub Pages, dùng cho ảnh xem trước trên Telegram
-  diaChi: "https://hoanggiacuong.github.io/ChucMung2010/",
+  // Địa chỉ trang trên Cloudflare Pages, dùng cho ảnh xem trước trên Telegram
+  diaChi: "https://bbold-gui-chi-em.pages.dev/",
   nguoiGui: "Cả team",          // ký tên cuối thư
   congTy: "cả nhà mình",        // "Chúc mừng 20/10 — từ ..."
   anhChung: "",                 // ảnh cả team ở cuối trang, ví dụ "anh/team.jpg"
