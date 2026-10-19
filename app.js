@@ -6,7 +6,6 @@
   var esc = function (s) {
     return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; });
   };
-  var cho = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
   var ngauNhien = function (a, b) { return a + Math.random() * (b - a); };
   var nhe = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var rung = function (ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) {} };
@@ -14,11 +13,6 @@
   /* ---------- Ảnh chibi (để trống thì dùng chữ cái đầu tên) ---------- */
   function chibi(nguoi) {
     return nguoi.chibi ? '<img src="' + esc(nguoi.chibi) + '" alt="">' : "<span>" + esc(Array.from(nguoi.tenNgan)[0]) + "</span>";
-  }
-  var coGacha = !!P.chibi; // có ảnh chibi thì mở đầu bằng một lượt quay gacha, ảnh để dành lúc lật thẻ
-  if (coGacha) {
-    $("#mo-dau-chu h1").innerHTML = "Có 1 lượt quay 20/10<br>dành cho <em id=\"ten-goi\"></em>";
-    $("#mo-dau-chu .cham").lastChild.textContent = "Chạm để quay ✨";
   }
 
   /* ---------- Link chung: chọn mặt mình rồi sang thiệp riêng ---------- */
@@ -49,7 +43,7 @@
     },
     neon: {
       mau: ["#ff3df2", "#c6ff3d", "#ff9cf7", "#eaffb8", "#ff1fa8", "#8a5cff", "#ffffff", "#3dfcff"],
-      chuTen: ["800", '"M PLUS Rounded 1c", sans-serif'], chuSo: ["700", '"Quicksand", sans-serif'],
+      chuTen: ["800", '"Bricolage Grotesque", sans-serif'], chuSo: ["700", '"Quicksand", sans-serif'],
       cao: ["#1a1a1a", "#c6ff3d", "#262626", "#ff3df2", "#111111"], chuCao: "#ffffff"
     },
     denim: {
@@ -64,7 +58,7 @@
     },
     kitty: {
       mau: ["#ff2f7b", "#ffd93d", "#ff8fc4", "#fff0f6", "#e6005c", "#ff6fa5", "#ffffff", "#8fd9ff"],
-      chuTen: ["600", '"Fredoka", sans-serif'], chuSo: ["700", '"Fredoka", sans-serif'],
+      chuTen: ["700", '"Mali", cursive'], chuSo: ["800", '"Baloo 2", sans-serif'],
       cao: ["#ff8fc4", "#fff0f6", "#ff2f7b", "#ffe4ef", "#e6005c"], chuCao: "rgba(122,31,69,.85)"
     }
   };
@@ -377,6 +371,20 @@
       } else if (p.kieu === "giu") {
         p.vx *= Math.pow(0.93, f); p.vy *= Math.pow(0.93, f);
         p.x += p.vx * f; p.y += p.vy * f; a = 0.55;
+      } else if (p.kieu === "dom") { // đom đóm: lượn lờ, nhấp nháy, bay lại gần ngón tay
+        p.pha += 0.02 * f;
+        p.vx += Math.cos(p.pha + p.hx) * 0.04 * f; p.vy += Math.sin(p.pha * 1.3 + p.hx) * 0.04 * f;
+        if (tay && bayGio - tay.luc < 1200) {
+          var kx = tay.x - p.x, ky = tay.y - p.y;
+          if (kx * kx + ky * ky < 40000) { p.vx += kx * 0.0009 * f; p.vy += ky * 0.0009 * f; }
+        }
+        var hd = Math.pow(0.96, f); p.vx *= hd; p.vy *= hd;
+        p.x += p.vx * f; p.y += p.vy * f;
+        if (p.x < -20) p.x = W + 20; else if (p.x > W + 20) p.x = -20;
+        if (p.y < -20) p.y = H + 20; else if (p.y > H + 20) p.y = -20;
+        if (p.song != null) { p.song -= f; if (p.song <= 0) { hat.splice(j, 1); continue; } }
+        p.vao = Math.min(1, p.vao + 0.015 * f);
+        a = p.vao * (0.25 + 0.6 * Math.pow(0.5 + 0.5 * Math.sin(t0 * 0.07 + p.hx * 5), 2)) * (p.song != null ? Math.min(1, p.song / 60) : 1);
       } else { // "hut": lò xo kéo về điểm đích, lấp lánh nhẹ
         var dx = p.tx + Math.sin(t0 * 0.05 + p.pha) * 0.8 - p.x, dy = p.ty + Math.cos(t0 * 0.05 + p.pha) * 0.8 - p.y;
         var tat = Math.pow(0.86, f);
@@ -413,53 +421,8 @@
     hat.push({ x: e.clientX, y: e.clientY, vx: ngauNhien(-0.6, 0.6), vy: ngauNhien(-0.3, 0.9), song: 34, toiDa: 34, co: ngauNhien(5, 9), dom: DOM[chiSo()], kieu: "roi", trongLuc: 0.03, can: 0.95 });
   }, { passive: true });
 
-  /* Lấy điểm từ một hình vẽ (chữ, ngôi sao) để các hạt tụ vào */
-  function layDiem(ve) {
-    var w = Math.max(1, Math.floor(W)), h = Math.max(1, Math.floor(H));
-    var c = document.createElement("canvas"); c.width = w; c.height = h;
-    var g = c.getContext("2d"); g.fillStyle = "#fff"; ve(g, w, h);
-    var d = g.getImageData(0, 0, w, h).data, buoc = Math.max(3, Math.round(Math.min(w, h) / 140)), ra = [];
-    for (var y = 0; y < h; y += buoc) for (var x = 0; x < w; x += buoc) if (d[(y * w + x) * 4 + 3] > 128) ra.push({ x: x, y: y });
-    return ra;
-  }
-  function diemChu(chu, kieuChu) { // kieuChu: [độ đậm, họ font]
-    return layDiem(function (g, w, h) {
-      var co = Math.min(h * 0.2, 190), font = function (s) { return kieuChu[0] + " " + s + "px " + kieuChu[1]; };
-      g.font = font(co);
-      var rong = g.measureText(chu).width;
-      if (rong > w * 0.86) { co *= w * 0.86 / rong; g.font = font(co); }
-      g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(chu, w / 2, h * 0.4);
-    });
-  }
-  function diemSao() { // ngôi sao 5 cánh độ hiếm, kiểu "★★★★★ UR" đồng bộ với màn quay gacha
-    return layDiem(function (g, w, h) {
-      var cx = w / 2, cy = h * 0.4, R = Math.min(w, h) * 0.3, r = R * 0.382;
-      g.beginPath();
-      for (var i = 0; i < 10; i++) {
-        var goc = -Math.PI / 2 + i * Math.PI / 5, ban = i % 2 === 0 ? R : r;
-        var x = cx + Math.cos(goc) * ban, y = cy + Math.sin(goc) * ban;
-        if (i === 0) g.moveTo(x, y); else g.lineTo(x, y);
-      }
-      g.closePath(); g.fill();
-    });
-  }
-  function tuVao(ds, diem) {
-    if (!diem.length) return;
-    for (var k = diem.length - 1; k > 0; k--) { var m = Math.floor(Math.random() * (k + 1)), tg = diem[k]; diem[k] = diem[m]; diem[m] = tg; }
-    ds.forEach(function (p, k) {
-      var d = diem[k % diem.length];
-      p.tx = d.x + ngauNhien(-1.5, 1.5); p.ty = d.y + ngauNhien(-1.5, 1.5); p.kieu = "hut";
-    });
-  }
-  function thaRoi(ds) {
-    ds.forEach(function (p) {
-      p.kieu = "roi"; p.vx = ngauNhien(-1.2, 1.2); p.vy = ngauNhien(-2, 0.5);
-      p.trongLuc = ngauNhien(0.02, 0.05); p.song = p.toiDa = ngauNhien(70, 160);
-    });
-  }
-
-  /* ---------- Hiệu ứng "hoành tráng" cho cảnh mở đầu: chớp sáng, rung máy, tia sáng xoay, hạt lấp lánh ---------- */
-  var manChop = $("#man-chop"), manTia = $("#man-tia");
+  /* ---------- Hiệu ứng "hoành tráng" cho cảnh mở đầu: chớp sáng, rung máy ---------- */
+  var manChop = $("#man-chop");
   function chopSang(doManh) {
     if (nhe || !manChop) return;
     manChop.style.setProperty("--do", String(doManh == null ? 0.55 : doManh));
@@ -471,59 +434,78 @@
       c.classList.remove("giat-may"); void c.offsetWidth; c.classList.add("giat-may");
     });
   }
-  function tiaBat(bat) { if (manTia) manTia.classList.toggle("bat", !!bat && !nhe); }
-  function longLanh(ds, keoDai) { // rắc thêm vài hạt lấp lánh quanh hình đang giữ, cho đỡ "đứng hình"
-    if (nhe || !ds.length) return;
-    var het = Date.now() + keoDai;
-    (function roi() {
-      if (Date.now() > het) return;
-      for (var i = 0; i < 2; i++) {
-        var p = ds[Math.floor(Math.random() * ds.length)];
-        hat.push({ x: p.tx, y: p.ty, vx: 0, vy: -ngauNhien(0.15, 0.4), song: 20, toiDa: 20, co: ngauNhien(8, 13), dom: DOM[6], kieu: "roi", trongLuc: 0, can: 0.98 });
-      }
-      setTimeout(roi, 130);
-    })();
+
+  /* ---------- Màn mở đầu: đom đóm bay theo tay, tụ thành "Chúc mừng 20-10" rồi thành tên người nhận ---------- */
+  var tay = null; // vị trí ngón tay/chuột gần nhất, đom đóm bay lại gần
+  window.addEventListener("pointermove", function (e) { tay = { x: e.clientX, y: e.clientY, luc: performance.now() }; }, { passive: true });
+  var MAU_DOM = [1, 3, 6, 1];
+  function domDom(x, y, song) {
+    return {
+      x: x, y: y, vx: ngauNhien(-0.5, 0.5), vy: ngauNhien(-0.5, 0.5), co: ngauNhien(6, 11), dom: DOM[MAU_DOM[Math.floor(Math.random() * MAU_DOM.length)]],
+      kieu: "dom", pha: Math.random() * 6.28, hx: Math.random() * 6.28, vao: 0, song: song == null ? null : song, toiDa: song || 1,
+      ke: ngauNhien(0.012, 0.022), tx: x, ty: y
+    };
   }
 
+  /* Lấy điểm từ chữ vẽ lên canvas ẩn để đom đóm tụ vào */
+  function layDiem(ve) {
+    var w = Math.max(1, Math.floor(W)), h = Math.max(1, Math.floor(H));
+    var c = document.createElement("canvas"); c.width = w; c.height = h;
+    var g = c.getContext("2d"); g.fillStyle = "#fff"; ve(g, w, h);
+    var d = g.getImageData(0, 0, w, h).data, buoc = Math.max(3, Math.round(Math.min(w, h) / 140)), ra = [];
+    for (var y = 0; y < h; y += buoc) for (var x = 0; x < w; x += buoc) if (d[(y * w + x) * 4 + 3] > 128) ra.push({ x: x, y: y });
+    return ra;
+  }
+  function diemChu(chu, kieuChu) { // kieuChu: [độ đậm, họ font]; "\n" để xuống dòng
+    var dong = chu.split("\n");
+    return layDiem(function (g, w, h) {
+      var co = Math.min(h * (dong.length > 1 ? 0.15 : 0.2), 180), font = function (s) { return kieuChu[0] + " " + s + "px " + kieuChu[1]; };
+      g.font = font(co);
+      var rong = Math.max.apply(null, dong.map(function (d) { return g.measureText(d).width; }));
+      if (rong > w * 0.86) { co *= w * 0.86 / rong; g.font = font(co); }
+      g.textAlign = "center"; g.textBaseline = "middle";
+      dong.forEach(function (d, k) { g.fillText(d, w / 2, h * 0.42 + (k - (dong.length - 1) / 2) * co * 1.15); });
+    });
+  }
+  function tuVao(ds, diem) {
+    if (!diem.length) return;
+    for (var k = diem.length - 1; k > 0; k--) { var m = Math.floor(Math.random() * (k + 1)), tg = diem[k]; diem[k] = diem[m]; diem[m] = tg; }
+    ds.forEach(function (p, k) {
+      var d = diem[k % diem.length];
+      p.tx = d.x + ngauNhien(-1.5, 1.5); p.ty = d.y + ngauNhien(-1.5, 1.5); p.kieu = "hut";
+    });
+  }
   var fontSan = Promise.race([
-    document.fonts ? Promise.all([
-      document.fonts.load(GD.chuTen[0] + " 80px " + GD.chuTen[1], P.tenNgan),
-      document.fonts.load(GD.chuSo[0] + " 80px " + GD.chuSo[1], "20·10")
-    ]) : Promise.resolve(),
-    cho(2500)
+    document.fonts ? document.fonts.load(GD.chuTen[0] + " 80px " + GD.chuTen[1], P.tenNgan + "Chúc mừng 20-10") : Promise.resolve(),
+    new Promise(function (r) { setTimeout(r, 2500); })
   ]).catch(function () {});
 
-  /* ---------- Màn mở đầu ---------- */
-  var xongMoDau = false, henPhao = null;
-  function trinhDien() {
-    var x = W / 2, y = H * 0.4, n = W < 500 ? 900 : 1400;
-    tiaBat(true); chopSang(0.5); giatManHinh();
-    ban(x, y, function () {
-      var ds = no(x, y, n, { giu: true, tocDo: 7, mau: [0, 1, 2, 3, 4, 6] });
-      taoVong(x, y, GD.mau[6], 1); taoVong(x, y, GD.mau[0], 0.7);
-      rung(30);
-      fontSan.then(function () {
-        setTimeout(function () { tuVao(ds, diemChu(P.tenNgan, GD.chuTen)); longLanh(ds, 3200); }, 400);
-        setTimeout(function () {
-          tuVao(ds, diemSao()); tiengChuong(); rung([15, 80, 15]); chopSang(0.4); giatManHinh();
-          taoVong(x, y, GD.mau[0], 0.85); taoVong(x, y, GD.mau[4], 0.55);
-        }, 3700);
-        setTimeout(function () { tuVao(ds, diemChu("20·10", GD.chuSo)); }, 6200);
-        setTimeout(function () {
-          thaRoi(ds); ketThucMoDau(); tiaBat(false); chopSang(0.65); giatManHinh();
-          taoVong(x, H * 0.32, GD.mau[1], 0.8);
-          banKieu("vong", x, H * 0.32);
-          banKieu("lieu", W * 0.22, H * 0.22); setTimeout(function () { banKieu("lieu", W * 0.78, H * 0.2); }, 350);
-        }, 9000);
-      });
+  var xongMoDau = false, bayDom = [];
+  function goiDomDom() {
+    var n = W < 500 ? 650 : 1000;
+    for (var k = 0; k < n; k++) { var p = domDom(ngauNhien(0, W), ngauNhien(0, H)); bayDom.push(p); hat.push(p); }
+    tiengChuong();
+    fontSan.then(function () {
+      setTimeout(function () { tuVao(bayDom, diemChu("Chúc mừng\n20-10", GD.chuTen)); notGacha(1); rung(20); }, nhe ? 200 : 2200);
+      setTimeout(function () {
+        tuVao(bayDom, diemChu(P.tenNgan, GD.chuTen));
+        chopSang(0.35); taoVong(W / 2, H * 0.42, GD.mau[1], 0.8); tiengChuong(); rung([20, 60, 20]);
+      }, nhe ? 1200 : 5800);
+      setTimeout(function () { tanRa(); ketThucMoDau(); }, nhe ? 2500 : 9400);
     });
+  }
+  function tanRa() { // đom đóm bay tản ra; giữ lại một ít lượn lờ suốt trang
+    bayDom.forEach(function (p, k) {
+      p.kieu = "dom"; p.vx = ngauNhien(-2.5, 2.5); p.vy = ngauNhien(-2.5, 2.5); p.vao = 1;
+      if (k % 12) p.song = p.toiDa = ngauNhien(90, 220); else p.song = null;
+    });
+    bayDom = [];
   }
   function ketThucMoDau() {
     xongMoDau = true;
     document.body.classList.remove("khoa");
     $("#keo-xuong").classList.add("hien");
     raiCanhHoa();
-    henPhao = setInterval(function () { if (!document.hidden && dangThay.moDau) banNgauNhien(); }, 3000);
   }
   $("#mo-dau").addEventListener("click", function (e) {
     if (!daBatDau) {
@@ -531,12 +513,15 @@
       batNhac();
       $("#nut-nhac").hidden = false;
       $("#mo-dau-chu").classList.add("an");
-      if (coGacha) quayGacha(); else trinhDien();
+      goiDomDom();
       return;
     }
-    if (e.target.closest(".keo-xuong")) return;
-    var x = e.clientX, y = Math.min(e.clientY, H * 0.75);
-    banKieu(KIEU[Math.floor(Math.random() * KIEU.length)], x, y);
+    if (!xongMoDau || e.target.closest(".keo-xuong")) return;
+    for (var k = 0; k < 24; k++) { // chạm: thả thêm một đàn đom đóm nhỏ
+      var p = domDom(e.clientX, e.clientY, ngauNhien(100, 180));
+      p.vx = ngauNhien(-3, 3); p.vy = ngauNhien(-3, 3); p.vao = 1; hat.push(p);
+    }
+    rung(10);
   });
 
   /* ---------- Quay gacha: quả cầu đổi màu xanh → tím → vàng → cầu vồng, nổ, lật thẻ chibi ---------- */
@@ -580,9 +565,26 @@
     if ($("#g-nhan").hidden || g.classList.contains("an")) return;
     g.classList.add("an");
     tiengChuong();
-    setTimeout(function () { g.hidden = true; document.body.classList.remove("dang-gacha"); trinhDien(); }, 650);
+    setTimeout(function () { g.hidden = true; g.classList.remove("an"); document.body.classList.remove("dang-gacha"); nhanThe(); }, 650);
   }
   $("#gacha").addEventListener("click", nhanNhanVat);
+
+  /* Nhận nhân vật xong: thẻ nhân vật lật ra ở đúng chỗ quả cầu gacha */
+  function nhanThe() {
+    var tv = $("#the-vibe");
+    $("#vibe-quay").hidden = true;
+    $("#vibe-goi-y").textContent = "Rê tay lên thẻ để thấy ánh kim nhé";
+    tv.hidden = false;
+    tv.classList.add("vua-nhan");
+    tv.addEventListener("animationend", function bo() { tv.classList.remove("vua-nhan"); tv.removeEventListener("animationend", bo); });
+    tv.scrollIntoView({ behavior: nhe ? "auto" : "smooth", block: "center" });
+    setTimeout(function () {
+      var r = tv.getBoundingClientRect();
+      tv.classList.add("mo");
+      phaoGiay(r.left + r.width / 2, r.top + r.height * 0.35, 70);
+      tiengChuong(); rung([20, 40, 20]);
+    }, 700);
+  }
 
   /* ---------- Phong thư ---------- */
   var phongBi = $("#phong-bi"), laThu = $("#la-thu"), daMoThu = false;
@@ -651,24 +653,22 @@
   });
 
   /* ---------- Hiện dần khi kéo tới ---------- */
-  var dangThay = { moDau: true };
   var quanSat = new IntersectionObserver(function (muc) {
     muc.forEach(function (m) {
       var id = m.target.id;
-      if (id === "mo-dau") { dangThay.moDau = m.isIntersecting; return; }
       if (!m.isIntersecting) return;
       if (id === "thu") {
         phongBi.classList.add("hien");
         $(".bang-chu").classList.add("hien");
       } else if (id === "vibe") {
-        $("#the-vibe").classList.add("mo");
+        if (!$("#the-vibe").hidden) $("#the-vibe").classList.add("mo"); // còn chờ quay gacha thì để lúc nhận thẻ mới chạy
       } else if (id === "ket" && !m.target.dataset.daBan) {
         m.target.dataset.daBan = "1"; banLoat(3);
       }
-      if (id !== "mo-dau") quanSat.unobserve(m.target);
+      quanSat.unobserve(m.target);
     });
   }, { threshold: 0.3 });
-  ["#mo-dau", "#thu", "#vibe", "#ket"].forEach(function (s) { quanSat.observe($(s)); });
+  ["#thu", "#vibe", "#ket"].forEach(function (s) { quanSat.observe($(s)); });
 
   function banLoat(n) { for (var k = 0; k < n; k++) setTimeout(banNgauNhien, k * 450); }
 
@@ -714,7 +714,7 @@
     });
   }
   if (P.nhan && P.nhan.length) {
-    dinhSticker(P.nhan.slice(0, 2), $("#mo-dau-chu"), coGacha ? ["left:4px;top:-58px", "right:4px;bottom:-52px"] : ["left:-8px;top:-6px", "right:-8px;top:64px"]);
+    dinhSticker(P.nhan.slice(0, 2), $("#mo-dau-chu"), ["left:0;top:-62px", "right:0;bottom:-56px"]);
     dinhSticker(P.nhan.slice(2, 4), $("#thu .khung"), ["left:-6px;top:-18px", "right:-6px;bottom:-14px"]);
   }
 
@@ -754,6 +754,18 @@
       no(r.left + r.width / 2, r.top + r.height * 0.3, 70, { tocDo: 4, mau: [0, 1, 6], imLang: true, trongLuc: 0.05 });
       tiengChuong(); rung(15);
     });
+    if (P.chibi) { // có ảnh chibi: thẻ úp, phải quay gacha mới nhận được
+      tv.hidden = true;
+      $("#vibe-quay").hidden = false;
+      $("#vibe-goi-y").textContent = "Có 1 lượt quay nhân vật dành cho " + P.ban;
+      var daQuay = false;
+      $("#vibe-quay").addEventListener("click", function () {
+        if (daQuay) return;
+        daQuay = true;
+        if (!am) batNhac();
+        quayGacha();
+      });
+    }
   }
 
   /* ---------- Bảng tin: lời chúc của team xen với dấu ấn "một năm qua" của riêng người nhận, dạng story vuốt xem ---------- */
@@ -807,7 +819,7 @@
     });
     new IntersectionObserver(function (m) {
       wrChay = m[0].isIntersecting;
-      wr.classList.toggle("chay", wrChay);
+      wr.classList.toggle("tu-chay", wrChay);
       if (wrChay) hienSlide(wrSo); else clearTimeout(wrHen);
     }, { threshold: 0.5 }).observe(wr);
   }

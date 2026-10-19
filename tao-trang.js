@@ -9,10 +9,10 @@ const phienBan = Date.now().toString(36); // chống trình duyệt trong Telegr
 // Font riêng cho từng giao diện (đều có dấu tiếng Việt)
 const FONT = {
   holo: "",
-  neon: "&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@700;800",
+  neon: "&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Space+Mono:wght@400;700",
   denim: "&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500;1,9..144,700&family=Lexend:wght@400;500;600",
   cherry: "&family=Baloo+2:wght@500;700;800&family=Pacifico",
-  kitty: "&family=Fredoka:wght@500;600;700&family=Caveat:wght@600;700"
+  kitty: "&family=Baloo+2:wght@500;600;700;800&family=Mali:wght@500;600;700"
 };
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
@@ -46,7 +46,6 @@ function trang(khoa, nguoi) {
 </head>
 <body class="khoa${nguoi.phongCach ? " kieu-" + nguoi.phongCach : ""}">
 <div class="sao" id="sao"></div>
-<div class="man-tia" id="man-tia" aria-hidden="true"></div>
 <canvas id="troi" aria-hidden="true"></canvas>
 <div class="man-chop" id="man-chop" aria-hidden="true"></div>
 <div class="canh-hoa" id="canh-hoa" aria-hidden="true"></div>
@@ -58,7 +57,7 @@ function trang(khoa, nguoi) {
       <div class="chibi chibi-mo" id="chibi-mo" hidden></div>
       <div class="nho">20 · 10 · ${new Date().getFullYear()}</div>
       <h1>Có một bất ngờ nhỏ<br>dành cho <em id="ten-goi"></em></h1>
-      <div class="cham"><span class="vong"><span></span></span>Chạm vào bầu trời</div>
+      <div class="cham"><span class="vong"><span></span></span>Chạm để gọi đom đóm ✨</div>
     </div>
     <div class="keo-xuong" id="keo-xuong"><a href="#thu"><span id="keo-chu"></span><b>↓</b></a></div>
   </section>
@@ -88,8 +87,11 @@ function trang(khoa, nguoi) {
       <div class="tieu-de">
         <div class="nho">Vibe check</div>
         <h2>Thẻ nhân vật</h2>
-        <p>Rê tay lên thẻ để thấy ánh kim nhé</p>
+        <p id="vibe-goi-y">Rê tay lên thẻ để thấy ánh kim nhé</p>
       </div>
+      <button class="vibe-quay" id="vibe-quay" type="button" hidden>
+        <span class="vq-cau"></span><b>Chạm để quay nhân vật ✨</b><small>Trúng gì giữ nấy nha</small>
+      </button>
       <div class="the-vibe" id="the-vibe">
         <div class="tv-trong">
           <div class="tv-dau"><span class="tv-hiem" id="tv-hiem"></span><span>20.10 · LIMITED</span><span class="tv-emoji" id="tv-emoji"></span></div>
