@@ -47,6 +47,11 @@
       a.classList.add("chon-roi"); document.body.classList.add("roi-di");
       setTimeout(function () { location.href = a.getAttribute("href"); }, 450);
     });
+    window.addEventListener("pageshow", function (e) { // bấm Back từ thiệp riêng: trình duyệt trả lại trang lúc đang chuyển đi, dựng lại các lá bài
+      if (!e.persisted) return;
+      document.body.classList.remove("roi-di");
+      document.querySelectorAll(".mot-nguoi").forEach(function (el) { el.classList.remove("chon-roi"); el.classList.add("hien-lai"); });
+    });
   }
 
   /* ---------- Giao diện riêng từng người: màu pháo hoa, font chữ pháo hoa, thẻ cào ---------- */
