@@ -10,6 +10,11 @@
   var nhe = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var rung = function (ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) {} };
 
+  /* Tải lại trang luôn về màn đầu: trình duyệt hay nhớ chỗ đang xem (hoặc #thu trên link) mà màn đầu lại đang khoá cuộn -> kẹt giữa trang */
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  window.scrollTo(0, 0);
+
   /* ---------- Ảnh chibi (để trống thì dùng chữ cái đầu tên) ---------- */
   function chibi(nguoi) {
     return nguoi.chibi ? '<img src="' + esc(nguoi.chibi) + '" alt="">' : "<span>" + esc(Array.from(nguoi.tenNgan)[0]) + "</span>";
@@ -529,6 +534,11 @@
       $("#nut-nhac").hidden = false;
       $("#mo-dau-chu").classList.add("an");
       goiDomDom();
+      return;
+    }
+    if (e.target.closest(".keo-xuong a")) { // cuộn xuống thư mà không gắn #thu vào link
+      e.preventDefault();
+      $("#thu").scrollIntoView({ behavior: nhe ? "auto" : "smooth" });
       return;
     }
     if (!xongMoDau || e.target.closest(".keo-xuong")) return;
