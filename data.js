@@ -42,7 +42,7 @@ var THIEP = {
       ban: "chị",
       loiChuc: [
         "Cảm ơn chị vì luôn là điểm tựa vững vàng của cả team, nghiêm túc khi cần mà vẫn giữ được sự trẻ con đáng yêu mỗi lúc trò chuyện.",
-        "20/10 này chúc chị luôn xinh đẹp, khoẻ mạnh, có thật nhiều dịp đi quẩy concert cùng chị Thảo, và nét vẽ cứ thế mà thăng hoa mãi nhé 🐻🎨"
+        "20/10 này chúc chị luôn xinh đẹp, khoẻ mạnh, có thật nhiều dịp đi quẩy concert cùng chị Thảo, và nét vẽ cứ thế mà thăng hoa mãi  🐻🎨"
       ],
       anh: "",
       chibi: "anh/chibi-ngan.jpg",
@@ -75,8 +75,8 @@ var THIEP = {
       chao: "Quyên ơi,",
       ban: "Quyên",
       loiChuc: [
-        "Cảm ơn Quyên vì luôn âm thầm làm tốt mọi việc, thông minh và chỉn chu trong từng chi tiết, về nhà lại ngồi ngắm mấy bể cá cảnh thuỷ sinh tự tay nuôi là vui cả ngày.",
-        "20/10 này chúc Quyên luôn cao ráo xinh đẹp, công việc vẫn thuận lợi như vốn có, và được người yêu chiều hết mức. Mong mấy bể cá cảnh của Quyên lúc nào cũng xanh tốt và đầy ắp niềm vui nhé!"
+        "Cảm ơn Quyên vì luôn âm thầm làm tốt mọi việc, thông minh và chỉn chu trong từng chi tiết",
+        "20/10 này chúc Quyên luôn cao ráo xinh đẹp, công việc vẫn thuận lợi như vốn có, và được người yêu chiều hết mức. Chúc mấy bể thuỷ sinh của Quyên luôn trong xanh, cá béo tròn, và mỗi lần ngắm là thêm một lần thấy bình yên nhé 🐠"
       ],
       anh: "",
       chibi: "anh/chibi-quyen.jpg",
@@ -93,7 +93,7 @@ var THIEP = {
       ban: "em",
       loiChuc: [
         "Cảm ơn em vì luôn chăm chỉ với công việc của mình, có việc gì cần là sẵn sàng tham gia ngay.",
-        "20/10 này chúc em luôn khoẻ mạnh, vui vẻ trong chính thế giới của mình, công việc thuận lợi và được mọi người thương nhiều hơn mỗi ngày nhé 🎧🌙"
+        "20/10 này chúc em luôn khoẻ mạnh, vui vẻ trong chính thế giới của mình, công việc thuận lợi và được nhiều thương nhiều hơn mỗi ngày nhé 🎧🌙"
       ],
       anh: "",
       chibi: "anh/chibi-quynhanh.jpg",
