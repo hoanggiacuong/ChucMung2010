@@ -42,7 +42,7 @@ var THIEP = {
       ban: "chị",
       loiChuc: [
         "Cảm ơn chị vì luôn là điểm tựa vững vàng của cả team, nghiêm túc khi cần mà vẫn giữ được sự trẻ con đáng yêu mỗi lúc trò chuyện.",
-        "20/10 này chúc chị luôn xinh đẹp, khoẻ mạnh, có thật nhiều dịp đi quẩy concert cùng chị Thảo, và nét vẽ cứ thế mà thăng hoa mãi  🐻🎨"
+        "20/10 này chúc chị luôn xinh đẹp, khoẻ mạnh, có thật nhiều dịp đi quẩy concert cùng chị Thảo, và nét vẽ cứ thế mà thăng hoa mãi 🐻🎨"
       ],
       anh: "",
       chibi: "anh/chibi-ngan.jpg",
@@ -75,13 +75,13 @@ var THIEP = {
       chao: "Quyên ơi,",
       ban: "Quyên",
       loiChuc: [
-        "Cảm ơn Quyên vì luôn âm thầm làm tốt mọi việc, thông minh và chỉn chu trong từng chi tiết",
+        "Cảm ơn Quyên vì luôn âm thầm làm tốt mọi việc, thông minh và chỉn chu trong từng chi tiết.",
         "20/10 này chúc Quyên luôn cao ráo xinh đẹp, công việc vẫn thuận lợi như vốn có, và được người yêu chiều hết mức. Chúc mấy bể thuỷ sinh của Quyên luôn trong xanh, cá béo tròn, và mỗi lần ngắm là thêm một lần thấy bình yên nhé 🐠"
       ],
       anh: "",
       chibi: "anh/chibi-quyen.jpg",
       phongCach: "neon",
-      nhan: ["mặt lạnh tim ấm 🖤", "cao mà dây thế đấy", "dân chơi thuỷ sinh có số 🐠", "đã có người yêu rồi nha"],
+      nhan: ["mặt lạnh tim ấm 🖤", "cao nhất hội", "dân chơi thuỷ sinh có số 🐠", "đã có người yêu rồi nha"],
       vibe: { danhHieu: "Cao thủ thuỷ sinh, mặt lạnh tim ấm", emoji: "🐠", hiem: "SSR", chiSo: [["Độ lạnh lúc nghiêm túc", 100], ["Độ thông minh", 100], ["Mê cá cảnh & cây thuỷ sinh", "∞"]] },
       wrapped: [["10", "câu nói trung bình một ngày (đã là nhiều)", "🤐"], ["∞", "niềm vui mỗi khi về nhà ngắm bể cá cảnh tự nuôi", "🐠"], ["1", "nụ cười khiến cả phòng auto tan chảy", "✨"], ["1", "người yêu kém tuổi đang chờ tan ca đón về", "💌"]],
       qua: "Hoa tươi và một bữa tiệc đang đợi chị em 💐🎉"
@@ -93,7 +93,7 @@ var THIEP = {
       ban: "em",
       loiChuc: [
         "Cảm ơn em vì luôn chăm chỉ với công việc của mình, có việc gì cần là sẵn sàng tham gia ngay.",
-        "20/10 này chúc em luôn khoẻ mạnh, vui vẻ trong chính thế giới của mình, công việc thuận lợi và được nhiều thương nhiều hơn mỗi ngày nhé 🎧🌙"
+        "20/10 này chúc em luôn khoẻ mạnh, vui vẻ trong chính thế giới của mình, công việc thuận lợi và được nhiều thương yêu mỗi ngày nhé 🎧🌙"
       ],
       anh: "",
       chibi: "anh/chibi-quynhanh.jpg",
