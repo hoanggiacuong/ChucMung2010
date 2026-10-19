@@ -802,6 +802,11 @@
 
   /* ---------- Bảng tin: lời chúc của team xen với dấu ấn "một năm qua" của riêng người nhận, dạng story vuốt xem ---------- */
   var slideTeam = D.loiChucTeam.map(function (l) { return ["💌", l.tu, l.loi]; });
+  for (var xt = slideTeam.length - 1; xt > 0; xt--) { // mỗi lần mở thiệp, lời chúc của anh em hiện theo thứ tự ngẫu nhiên
+    var yt = Math.floor(Math.random() * (xt + 1)), tam = slideTeam[xt]; slideTeam[xt] = slideTeam[yt]; slideTeam[yt] = tam;
+  }
+  var viTriDau = slideTeam.findIndex(function (s) { return D.loiChucDauTien && s[1] === D.loiChucDauTien; });
+  if (viTriDau > 0) slideTeam.unshift(slideTeam.splice(viTriDau, 1)[0]);
   var slideRieng = (P.wrapped || []).map(function (w) { return [w[2] || "✨", w[0], w[1]]; });
   var slide = []; // xen kẽ 1 lời chúc - 1 dấu ấn riêng, hết bên nào thì nối nốt bên kia
   for (var si = 0; si < Math.max(slideTeam.length, slideRieng.length); si++) {

@@ -108,7 +108,9 @@ var THIEP = {
   // Vườn hoa: mỗi anh em một bông, chạm vào để đọc.
   // Để trống ở đây — lời chúc thật được đồng bộ từ Google Form vào loi-chuc-gop.js
   // (chạy: node dong-bo-loi-chuc.js "<link-CSV>"), riêng cho từng người.
-  loiChucTeam: []
+  loiChucTeam: [],
+  // Bảng tin: lời chúc của người này luôn hiện đầu tiên, những người khác xếp ngẫu nhiên mỗi lần mở (để trống "" thì ngẫu nhiên hết)
+  loiChucDauTien: "Anh Bộ"
 };
 
 if (typeof module !== "undefined") module.exports = THIEP;
