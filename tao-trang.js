@@ -14,6 +14,7 @@ const FONT = {
   cherry: "&family=Baloo+2:wght@500;700;800&family=Pacifico",
   kitty: "&family=Baloo+2:wght@500;600;700;800&family=Mali:wght@500;600;700"
 };
+const FONT_CHON = "&family=Baloo+2:wght@700;800&family=Mali:wght@600;700"; // trang chọn người: tươi sáng, dễ thương
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
 function trang(khoa, nguoi) {
@@ -29,7 +30,7 @@ function trang(khoa, nguoi) {
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>${esc(tieuDe)}</title>
 <meta name="description" content="${esc(moTa)}">
-<meta name="theme-color" content="#0b0718">
+<meta name="theme-color" content="#fff5f9">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(tieuDe)}">
 <meta property="og:description" content="${esc(moTa)}">
@@ -41,7 +42,7 @@ function trang(khoa, nguoi) {
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💐</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Quicksand:wght@500;600;700&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600${FONT[nguoi.phongCach] || ""}&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Quicksand:wght@500;600;700&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600${FONT[nguoi.phongCach] || ""}${khoa ? "" : FONT_CHON}&display=swap">
 <link rel="stylesheet" href="style.css?v=${phienBan}">
 </head>
 <body class="khoa${nguoi.phongCach ? " kieu-" + nguoi.phongCach : ""}">
@@ -56,7 +57,6 @@ function trang(khoa, nguoi) {
     <div class="mo-dau-chu" id="mo-dau-chu">
       <div class="chibi chibi-mo" id="chibi-mo" hidden></div>
       <div class="nho">20 · 10 · ${new Date().getFullYear()}</div>
-      <h1>Có một bất ngờ nhỏ<br>dành cho <em id="ten-goi"></em></h1>
       <div class="cham"><span class="vong"><span></span></span>Chạm để gọi đom đóm ✨</div>
     </div>
     <div class="keo-xuong" id="keo-xuong"><a href="#thu"><span id="keo-chu"></span><b>↓</b></a></div>
@@ -169,8 +169,8 @@ function trang(khoa, nguoi) {
 <div class="chon" id="chon" hidden>
   <div class="khung">
     <div class="nho">20 · 10 · ${new Date().getFullYear()}</div>
-    <h1>Thiệp này của ai nào?</h1>
-    <p>Chạm vào lá bài có tên mình để mở thiệp nhé</p>
+    <h1>Gửi những bông hoa<br>của team 💐</h1>
+    <p>Lá bài nào có tên mình thì chạm vào nhé</p>
     <div class="ds-chon" id="ds-chon"></div>
   </div>
 </div>

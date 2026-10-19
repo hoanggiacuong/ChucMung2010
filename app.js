@@ -16,13 +16,24 @@
   }
 
   /* ---------- Link chung: chọn mặt mình rồi sang thiệp riêng ---------- */
+  var MAU_LA = { // lá bài pastel theo giao diện riêng của từng người
+    holo: ["#d9c6ff", "#a8f0ff"], neon: ["#d6ff7a", "#7fe8c8"], denim: ["#9cc9ff", "#ffe08a"],
+    cherry: ["#ff9fb2", "#ffd6a5"], kitty: ["#ff9cc8", "#ffd1e6"], mac: ["#ffb3c7", "#c9a7ff"]
+  };
   var khoaNguoi = Object.keys(D.chiEm);
   if (!window.NGUOI_NHAN && khoaNguoi.length) {
     $("#ds-chon").innerHTML = khoaNguoi.map(function (k, i) {
-      var n = D.chiEm[k];
-      return '<a class="mot-nguoi" href="' + k + '.html" style="animation-delay:' + (0.15 + i * 0.12) + 's">' +
+      var n = D.chiEm[k], mau = MAU_LA[n.phongCach] || MAU_LA.mac;
+      return '<a class="mot-nguoi" href="' + k + '.html" style="--c1:' + mau[0] + ";--c2:" + mau[1] + ";animation-delay:" + (0.15 + i * 0.12) + 's">' +
         '<span class="la-up"><i>?</i></span><b>' + esc(n.tenNgan) + "</b></a>"; // lá bài úp: mặt chibi để dành lúc quay gacha
     }).join("");
+    var trangTri = ["💖", "🌸", "✨", "🎀", "💐", "🌷", "💕", "⭐"], hTri = "";
+    for (var t = 0; t < 14; t++) {
+      var benTrai = t % 2 === 0; // chỉ rải dọc hai mép, tránh đè lên chữ và lá bài ở giữa
+      hTri += '<span class="chon-tri" style="left:' + (benTrai ? ngauNhien(2, 10) : ngauNhien(86, 93)).toFixed(0) + "%;top:" + ngauNhien(3, 92).toFixed(0) + "%;font-size:" + ngauNhien(14, 26).toFixed(0) +
+        "px;animation-delay:-" + ngauNhien(0, 6).toFixed(1) + 's">' + trangTri[t % trangTri.length] + "</span>";
+    }
+    $("#chon").insertAdjacentHTML("afterbegin", hTri);
     $("#chon").hidden = false;
     document.body.classList.add("dang-chon");
     $("#ds-chon").addEventListener("click", function (e) {
@@ -39,27 +50,27 @@
     holo: {
       mau: ["#c7a6ff", "#9ff3ff", "#ffc4f0", "#f0eaff", "#ff8ad8", "#a78bfa", "#ffffff", "#7ef0ff"],
       chuTen: ["700", '"Quicksand", sans-serif'], chuSo: ["700", '"Quicksand", sans-serif'],
-      cao: ["#b8c6ff", "#ffd6f5", "#9ff3ff", "#e7d6ff", "#c7a6ff"], chuCao: "rgba(60,30,110,.8)"
+      cao: ["#b8c6ff", "#ffd6f5", "#9ff3ff", "#e7d6ff", "#c7a6ff"], chuCao: "rgba(60,30,110,.8)", dom: ["#7c4dff", "#d63fb0", "#2bb3d6"]
     },
     neon: {
       mau: ["#ff3df2", "#c6ff3d", "#ff9cf7", "#eaffb8", "#ff1fa8", "#8a5cff", "#ffffff", "#3dfcff"],
       chuTen: ["800", '"Bricolage Grotesque", sans-serif'], chuSo: ["700", '"Quicksand", sans-serif'],
-      cao: ["#1a1a1a", "#c6ff3d", "#262626", "#ff3df2", "#111111"], chuCao: "#ffffff"
+      cao: ["#1a1a1a", "#c6ff3d", "#262626", "#ff3df2", "#111111"], chuCao: "#ffffff", dom: ["#ff1fa8", "#8a5cff", "#5fa800"]
     },
     denim: {
       mau: ["#ffb3c7", "#ffe08a", "#cfe6ff", "#fffbe8", "#ff8fae", "#a9c9ff", "#ffffff", "#8ec5ff"],
       chuTen: ["italic 700", '"Fraunces", serif'], chuSo: ["700", '"Quicksand", sans-serif'],
-      cao: ["#9cc7f2", "#e6f2ff", "#7fb0e6", "#fff4c9", "#8ab8ea"], chuCao: "rgba(25,50,90,.8)"
+      cao: ["#9cc7f2", "#e6f2ff", "#7fb0e6", "#fff4c9", "#8ab8ea"], chuCao: "rgba(25,50,90,.8)", dom: ["#3a6fb5", "#e86a92", "#e0a417"]
     },
     cherry: {
       mau: ["#ff4d6d", "#ffc98a", "#ffb3c0", "#fff1e0", "#e01e47", "#ff8fa3", "#ffffff", "#ffd27a"],
       chuTen: ["400", '"Pacifico", cursive'], chuSo: ["800", '"Baloo 2", sans-serif'],
-      cao: ["#ff8fa3", "#ffe1e7", "#ff4d6d", "#fff1e0", "#e01e47"], chuCao: "rgba(110,10,30,.8)"
+      cao: ["#ff8fa3", "#ffe1e7", "#ff4d6d", "#fff1e0", "#e01e47"], chuCao: "rgba(110,10,30,.8)", dom: ["#d0123c", "#ff4d6d", "#c9733a"]
     },
     kitty: {
       mau: ["#ff2f7b", "#ffd93d", "#ff8fc4", "#fff0f6", "#e6005c", "#ff6fa5", "#ffffff", "#8fd9ff"],
       chuTen: ["700", '"Mali", cursive'], chuSo: ["800", '"Baloo 2", sans-serif'],
-      cao: ["#ff8fc4", "#fff0f6", "#ff2f7b", "#ffe4ef", "#e6005c"], chuCao: "rgba(122,31,69,.85)"
+      cao: ["#ff8fc4", "#fff0f6", "#ff2f7b", "#ffe4ef", "#e6005c"], chuCao: "rgba(122,31,69,.85)", dom: ["#ff2f7b", "#e6005c", "#c2187a"]
     }
   };
   var GD = GIAO_DIEN[P.phongCach] || {
@@ -69,7 +80,6 @@
   };
 
   /* ---------- Nội dung ---------- */
-  $("#ten-goi").textContent = P.goi;
   $("#keo-chu").textContent = "Kéo xuống, có thư cho " + P.ban;
   $("#pb-ten").textContent = P.goi;
 
@@ -333,7 +343,7 @@
     daSach = false;
     cx.globalCompositeOperation = "destination-out";
     cx.fillStyle = "rgba(0,0,0,0.24)"; cx.fillRect(0, 0, W, H);
-    cx.globalCompositeOperation = "lighter";
+    cx.globalCompositeOperation = "source-over"; // nền sáng: vẽ chồng bình thường cho màu đậm, không cộng sáng thành trắng
 
     for (var q = loe.length - 1; q >= 0; q--) {
       var L = loe[q]; L.a *= Math.pow(0.86, f);
@@ -390,7 +400,7 @@
         var tat = Math.pow(0.86, f);
         p.vx = (p.vx + dx * p.ke * f) * tat; p.vy = (p.vy + dy * p.ke * f) * tat;
         p.x += p.vx * f; p.y += p.vy * f;
-        a = 0.38 + 0.22 * Math.sin(t0 * 0.15 + p.pha);
+        a = 0.6 + 0.25 * Math.sin(t0 * 0.15 + p.pha);
       }
       cx.globalAlpha = a;
       var co = p.kieu === "roi" ? p.co : p.co * 0.75;
@@ -438,10 +448,15 @@
   /* ---------- Màn mở đầu: đom đóm bay theo tay, tụ thành "Chúc mừng 20-10" rồi thành tên người nhận ---------- */
   var tay = null; // vị trí ngón tay/chuột gần nhất, đom đóm bay lại gần
   window.addEventListener("pointermove", function (e) { tay = { x: e.clientX, y: e.clientY, luc: performance.now() }; }, { passive: true });
-  var MAU_DOM = [1, 3, 6, 1];
+  var DOM_DOM = (GD.dom || ["#e0457b", "#a855f7", "#f59e0b"]).map(function (c) { // đom đóm: màu đậm để nổi trên nền sáng
+    var s = document.createElement("canvas"); s.width = s.height = 32;
+    var g = s.getContext("2d"), r = g.createRadialGradient(16, 16, 0, 16, 16, 16);
+    r.addColorStop(0, "#fff"); r.addColorStop(0.18, c); r.addColorStop(0.55, c + "66"); r.addColorStop(1, "rgba(0,0,0,0)");
+    g.fillStyle = r; g.fillRect(0, 0, 32, 32); return s;
+  });
   function domDom(x, y, song) {
     return {
-      x: x, y: y, vx: ngauNhien(-0.5, 0.5), vy: ngauNhien(-0.5, 0.5), co: ngauNhien(6, 11), dom: DOM[MAU_DOM[Math.floor(Math.random() * MAU_DOM.length)]],
+      x: x, y: y, vx: ngauNhien(-0.5, 0.5), vy: ngauNhien(-0.5, 0.5), co: ngauNhien(6, 11), dom: DOM_DOM[Math.floor(Math.random() * DOM_DOM.length)],
       kieu: "dom", pha: Math.random() * 6.28, hx: Math.random() * 6.28, vao: 0, song: song == null ? null : song, toiDa: song || 1,
       ke: ngauNhien(0.012, 0.022), tx: x, ty: y
     };
@@ -539,6 +554,7 @@
     $("#g-ten").textContent = P.tenNgan;
     g.hidden = false;
     document.body.classList.add("dang-gacha");
+    document.documentElement.classList.add("khoa-cuon"); // đang mở thẻ: không cho cuộn trang
     var buoc = function (k) {
       g.className = "gacha roi m" + (k + 1);
       g.style.setProperty("--g", MAU_G[k]);
@@ -565,9 +581,10 @@
     if ($("#g-nhan").hidden || g.classList.contains("an")) return;
     g.classList.add("an");
     tiengChuong();
-    setTimeout(function () { g.hidden = true; g.classList.remove("an"); document.body.classList.remove("dang-gacha"); nhanThe(); }, 650);
+    setTimeout(function () { g.hidden = true; g.classList.remove("an"); document.body.classList.remove("dang-gacha"); document.documentElement.classList.remove("khoa-cuon"); nhanThe(); }, 650);
   }
   $("#gacha").addEventListener("click", nhanNhanVat);
+  ["touchmove", "wheel"].forEach(function (t) { $("#gacha").addEventListener(t, function (e) { e.preventDefault(); }, { passive: false }); }); // iOS vẫn cuộn được dù đã overflow:hidden
 
   /* Nhận nhân vật xong: thẻ nhân vật lật ra ở đúng chỗ quả cầu gacha */
   function nhanThe() {
@@ -715,7 +732,7 @@
   }
   if (P.nhan && P.nhan.length) {
     dinhSticker(P.nhan.slice(0, 2), $("#mo-dau-chu"), ["left:0;top:-62px", "right:0;bottom:-56px"]);
-    dinhSticker(P.nhan.slice(2, 4), $("#thu .khung"), ["left:-6px;top:-18px", "right:-6px;bottom:-14px"]);
+    dinhSticker(P.nhan.slice(2, 4), $("#thu .khung"), ["left:-6px;top:-40px", "right:-6px;bottom:-36px"]);
   }
 
   /* ---------- Băng chữ chạy ---------- */
